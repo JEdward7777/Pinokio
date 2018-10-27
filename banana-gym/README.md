@@ -1,5 +1,5 @@
 This repository contains a PIP package which is an OpenAI environment for
-simulating an enironment in which potatos get sold.
+simulating an enironment in which bananas get sold.
 
 
 ## Installation
@@ -16,9 +16,9 @@ pip install -e .
 
 ```
 import gym
-import gym_potato
+import gym_banana
 
-env = gym.make('Potato-v0')
+env = gym.make('Banana-v0')
 ```
 
 See https://github.com/matthiasplappert/keras-rl/tree/master/examples for some
@@ -27,11 +27,11 @@ examples.
 
 ## The Environment
 
-Imagine you are selling potatos. One at a time. And the potatos get bad pretty
-quickly. Let's say in 3 days. The probability that I will sell the potato
+Imagine you are selling bananas. One at a time. And the bananas get bad pretty
+quickly. Let's say in 3 days. The probability that I will sell the banana
 is given by
 
 $$p(x) = (1+e)/(1. + e^(x+1))$$
 
 where x-1 is my profit. This x-1 is my reward. If I don't sell the
-potato, the agent gets a reward of -1 (the price of the potato).
+banana, the agent gets a reward of -1 (the price of the banana).

@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-Simulate the simplifie Potato selling environment.
+Simulate the simplifie Banana selling environment.
 
-Each episode is selling a single potato.
+Each episode is selling a single banana.
 """
 
 # core modules
@@ -21,20 +21,20 @@ import numpy as np
 
 
 path = 'config.yaml'  # always use slash in packages
-filepath = pkg_resources.resource_filename('gym_potato', path)
+filepath = pkg_resources.resource_filename('gym_banana', path)
 config = cfg_load.load(filepath)
 logging.config.dictConfig(config['LOGGING'])
 
 
 def get_chance(x):
-    """Get probability that a potato will be sold at price x."""
+    """Get probability that a banana will be sold at price x."""
     e = math.exp(1)
     return (1.0 + e) / (1. + math.exp(x + 1))
 
 
-class PotatoEnv(gym.Env):
+class BananaEnv(gym.Env):
     """
-    Define a simple Potato environment.
+    Define a simple Banana environment.
 
     The environment defines which actions can be taken at which point and
     when the agent receives which reward.
@@ -42,14 +42,14 @@ class PotatoEnv(gym.Env):
 
     def __init__(self):
         self.__version__ = "0.1.0"
-        logging.info("PotatoEnv - Version {}".format(self.__version__))
+        logging.info("BananaEnv - Version {}".format(self.__version__))
 
         # General variables defining the environment
         self.MAX_PRICE = 2.0
         self.TOTAL_TIME_STEPS = 2
 
         self.curr_step = -1
-        self.is_potato_sold = False
+        self.is_banana_sold = False
 
         # Define what the agent can do
         # Sell at 0.00 EUR, 0.10 Euro, ..., 2.00 Euro
@@ -96,13 +96,13 @@ class PotatoEnv(gym.Env):
                  However, official evaluations of your agent are not allowed to
                  use this for learning.
         """
-        if self.is_potato_sold:
+        if self.is_banana_sold:
             raise RuntimeError("Episode is done")
         self.curr_step += 1
         self._take_action(action)
         reward = self._get_reward()
         ob = self._get_state()
-        return ob, reward, self.is_potato_sold, {}
+        return ob, reward, self.is_banana_sold, {}
 
     def _take_action(self, action):
         self.action_episode_memory[self.curr_episode].append(action)
@@ -110,21 +110,21 @@ class PotatoEnv(gym.Env):
                       (self.action_space.n - 1)) * action)
 
         chance_to_take = get_chance(self.price)
-        potato_is_sold = (random.random() < chance_to_take)
+        banana_is_sold = (random.random() < chance_to_take)
 
-        if potato_is_sold:
-            self.is_potato_sold = True
+        if banana_is_sold:
+            self.is_banana_sold = True
 
         remaining_steps = self.TOTAL_TIME_STEPS - self.curr_step
         time_is_over = (remaining_steps <= 0)
-        throw_away = time_is_over and not self.is_potato_sold
+        throw_away = time_is_over and not self.is_banana_sold
         if throw_away:
-            self.is_potato_sold = True  # abuse this a bit
+            self.is_banana_sold = True  # abuse this a bit
             self.price = 0.0
 
     def _get_reward(self):
-        """Reward is given for a sold potato."""
-        if self.is_potato_sold:
+        """Reward is given for a sold banana."""
+        if self.is_banana_sold:
             return self.price - 1
         else:
             return 0.0
@@ -139,7 +139,7 @@ class PotatoEnv(gym.Env):
         """
         self.curr_episode += 1
         self.action_episode_memory.append([])
-        self.is_potato_sold = False
+        self.is_banana_sold = False
         self.price = 1.00
         return self._get_state()
 

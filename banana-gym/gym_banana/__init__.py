@@ -4,6 +4,6 @@ from gym.envs.registration import register
 logger = logging.getLogger(__name__)
 
 register(
-    id='Potato-v0',
-    entry_point='gym_potato.envs:PotatoEnv',
+    id='Banana-v0',
+    entry_point='gym_banana.envs:BananaEnv',
 )
