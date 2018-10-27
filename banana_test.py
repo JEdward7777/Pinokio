@@ -3,7 +3,7 @@
 #https://stackoverflow.com/questions/45068568/is-it-possible-to-create-a-new-gym-environment-in-openai
 
 import gym
-import gym_bababa
+import gym_banana
 env = gym.make('Banana-v0')
 env.num_envs = 1
 learn = r.get_learn_function("ppo2")
