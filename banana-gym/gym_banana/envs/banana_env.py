@@ -96,8 +96,8 @@ class BananaEnv(gym.Env):
                  However, official evaluations of your agent are not allowed to
                  use this for learning.
         """
-        if self.is_banana_sold:
-            raise RuntimeError("Episode is done")
+        #if self.is_banana_sold:
+        #    raise RuntimeError("Episode is done")
         self.curr_step += 1
         self._take_action(action)
         reward = self._get_reward()
