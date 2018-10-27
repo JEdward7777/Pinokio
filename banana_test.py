@@ -5,6 +5,9 @@
 import gym
 import gym_banana
 import baselines.run as r
+
+time_cycles = 2464
+
 env = gym.make('Banana-v0')
 env.num_envs = 1
 learn = r.get_learn_function("ppo2")
