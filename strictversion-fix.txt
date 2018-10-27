@@ -1,0 +1,16 @@
+From eabda4b5fc4c87ea7e229142ada2e70d8949cd98 Mon Sep 17 00:00:00 2001
+From: Joshua <HootOwl7777+git@gmail.com>
+Date: Sat, 27 Oct 2018 13:47:32 -0400
+Subject: Prevent StrictVersion from failing with a dashless rc suffex.
+
+
+diff --git a/setup.py b/setup.py
+index 425a1e8..7244c18 100644
+--- a/setup.py
++++ b/setup.py
+@@ -57,4 +57,4 @@ for tf_pkg_name in ['tensorflow', 'tensorflow-gpu']:
+         pass
+ assert tf_pkg is not None, 'TensorFlow needed, of version above 1.4'
+ from distutils.version import StrictVersion
+-assert StrictVersion(re.sub(r'-rc\d+$', '', tf_pkg.version)) >= StrictVersion('1.4.0')
++assert StrictVersion(re.sub(r'-?rc\d+$', '', tf_pkg.version)) >= StrictVersion('1.4.0')
