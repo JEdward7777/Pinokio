@@ -1,0 +1,9 @@
+#notepad C:\josh\ai\env\Lib\site-packages\gym\envs\__init__.py
+register(
+    id="Pinokio-v0",
+    entry_point='pinokio.pinokio:Pinokio',
+    max_episode_steps=1000,
+    reward_threshold=1000,
+)
+import sys
+sys.path.append('C:\\josh\\ai\\Pinokio')
