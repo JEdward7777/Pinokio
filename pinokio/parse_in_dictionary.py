@@ -28,15 +28,32 @@ def parse_diciontary( source_xml, target_json ):
             translated_words = []
         print( "word: " + word + " translated_words = " + str(translated_words) )
 
-        entry = get_or_make_entry( data, word )
+        word = tame( word )
+        if len(word) > 0:
 
-        for translated_word in translated_words:
-            other_entry = get_or_make_entry( data, translated_word )
-            entry['dict'].append( other_entry['index'] )
+            entry = get_or_make_entry( data, word )
+
+            for translated_word in translated_words:
+                translated_word = tame( translated_word )
+                if len(translated_word) > 0:
+                    other_entry = get_or_make_entry( data, translated_word )
+                    entry['dict'].append( other_entry['index'] )
 
     #now save it back out.
     with open(target_json, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
+
+
+
+def tame( word ):
+    punks = ['!','?','.',',','¡','¿', ')', '(', ';', '-', '[', ']', '\\', '/', '"', ':', "'", "@", "=", "~", " ", "”", "»", "’" ]
+    while len( word ) > 0 and word[-1] in punks:
+        word = word[:-1]
+    while len( word ) > 0 and word[0] in punks:
+        word = word[1:]
+    word = word.lower()
+    return word
+    
 
 last_index_used = []    
 def get_or_make_entry( data, word ):
@@ -51,13 +68,13 @@ def get_or_make_entry( data, word ):
         #need to make it.
         last_index_used[0] += 1
         data['word_to_index'][word] = last_index_used[0]
-        data['index_to_word'][last_index_used[0]] = {
+        data['index_to_word'][str(last_index_used[0])] = {
             'index': last_index_used[0],
             'word': word,
             'dict': []
         }
 
-    entry = data['index_to_word'][data['word_to_index'][word]]
+    entry = data['index_to_word'][str(data['word_to_index'][word])]
 
     return entry
 
