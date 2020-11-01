@@ -1,11 +1,16 @@
-import random
+import random, os
 import gym, math, json
 import numpy as np
 import parse_in_dictionary
 from gym import spaces
 
+from stable_baselines.common.policies import MlpPolicy
+from stable_baselines.common.vec_env import DummyVecEnv
+from stable_baselines import PPO2
+
 words_file = 'words.json'
-sentances_file = "/home/lansford/Sync/projects/tf_over/pinokio/Pinokio/spa-eng/spa.txt"
+#sentances_file = "/home/lansford/Sync/projects/tf_over/pinokio/Pinokio/spa-eng/spa.txt"
+sentances_file = "../spa-eng/spa.txt"
 
 class SentancePair:
     _input = None
@@ -14,12 +19,13 @@ class SentancePair:
         self._input = []
         self.output = []
     
-PUSH_TO = 0
-PULL_FROM = 1
-OUTPUT = 0
-STACK = 1
-DIC = 2
-INPUT = 3
+NOOP = 0
+PUSH_TO = 1
+PULL_FROM = 2
+OUTPUT = 1
+STACK = 2
+DIC = 3
+INPUT = 4
 
 class Pinokio2(gym.Env):
     nsteps = 0
@@ -30,6 +36,7 @@ class Pinokio2(gym.Env):
     starting_sentance_length = 0
     unique_words_pulled_from_stack = None
     unique_words_pulled_from_dict = None
+    unique_words_pushed_to_dict = None
     
     output = None
     stack = None
@@ -39,6 +46,29 @@ class Pinokio2(gym.Env):
     
     sentance_pairs = None
     selected_pair = None
+
+
+    last_actions = None
+
+    def render( self ):
+
+        action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
+        what_dec = {NOOP: "nothing", OUTPUT:"output",STACK:"stack",DIC:"dic",INPUT:"input"}
+        print( action_dec[self.last_actions[0]] + " " + what_dec[self.last_actions[1]] )
+
+
+        def translate_list( word_list ):
+            return [self.words['index_to_word'][str(word)]['word'] for word in word_list ]
+
+
+
+
+        print( ("output = [ " + str(translate_list( self.output )) + "]").encode('utf8') )
+        print( ("stack = [ " + str(translate_list( self.stack )) + "]").encode('utf8') )
+        print( ("input = [ " + str(translate_list( self._input )) + "]").encode('utf8') )
+        print( ("accumulator = " + str(translate_list( [self.accumulator] ))).encode('utf8'))
+        print( ("dictionary = [ " + str(translate_list( self.dictionary )) + "]").encode('utf8') )
+        
     
 
     def __init__(self,skip_load=False):
@@ -48,9 +78,10 @@ class Pinokio2(gym.Env):
         self._load_words()
         self._load_sentance_pairs()
         
-        #0: which action 0 push 1 pull
-        #1: what thing   0 output, 1 stack, 2 dictionary, 3 input
-        self.action_space = spaces.Tuple((spaces.Discrete(2), spaces.Discrete(4))) 
+        #0: which action 0 noop 1 push 2 pull
+        #1: what thing   0 noop 1 output, 2 stack, 3 dictionary, 4 input
+        #self.action_space = spaces.Tuple((spaces.Discrete(2), spaces.Discrete(4))) 
+        self.action_space = spaces.MultiDiscrete( [3,5] )
         #0 last output
         #1 top of stack
         #2 current dictionary output
@@ -83,7 +114,7 @@ class Pinokio2(gym.Env):
             
         #3 current input
         if self._input:
-            obs.append( self._input[-1] )
+            obs.append( self._input[0] )
         else:
             obs.append( self._word_to_index( "<eos>" ) )
             
@@ -102,17 +133,27 @@ class Pinokio2(gym.Env):
     def step(self, action):
         
         self.nsteps += 1
-        
+
         reward = 0
-        done = (not self.output) or (self.output[-1] != self._word_to_index( "<eos>" ))
+
+
+        done = not not (self.output and self.output[-1] == self._word_to_index( "<eos>" ))
+
+        if self.nsteps > self.starting_sentance_length * 4:
+            reward -= (self.nsteps - self.starting_sentance_length) * 10
+        
             
         if not done:
-            action_dec = {PUSH_TO:"push to",PULL_FROM:"pull from"}
-            what_dec = {OUTPUT:"output",STACK:"stack",DIC:"dic",INPUT:"input"}
+            self.last_actions = action
+            #action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
+            #what_dec = {NOOP: "nothing", OUTPUT:"output",STACK:"stack",DIC:"dic",INPUT:"input"}
             
-            print( action_dec[action[0]] + " " + what_dec[action[1]] )
+            #print( action_dec[action[0]] + " " + what_dec[action[1]] )
+
+            if action[1] == NOOP or action[0] == NOOP:
+                reward -= 1e5
             
-            if action[1] == OUTPUT:
+            elif action[1] == OUTPUT:
                 if action[0] == PUSH_TO:
                     self.output.append( self.accumulator )
                     #push to output. One point if consumed words is greater then the output length. -1 point for each push double the length of the input.
@@ -148,7 +189,13 @@ class Pinokio2(gym.Env):
                         
             elif action[1] == DIC:
                 if action[0] == PUSH_TO:
-                    self.dictionary = self.words["index_to_word"][str(self.accumulator)]["dict"]
+                    self.dictionary = self.words["index_to_word"][str(self.accumulator)]["dict"][:]
+                    if not self.accumulator in self.unique_words_pushed_to_dict:
+                        self.unique_words_pushed_to_dict.append( self.dictionary )
+                    else:
+                        #don't want to keep pushing the same word over and over to dictionary.
+                        reward -= 1
+
                 elif action[0] == PULL_FROM:
                     if self.dictionary:
                         self.accumulator = self.dictionary.pop(0)
@@ -170,14 +217,17 @@ class Pinokio2(gym.Env):
                         #pull from input. No reward if the input is empty. One point if consumed words is less than output length.
                         if self.starting_sentance_length - len(self._input) < len(self.output):
                             reward += 1
-                        self.accumulator = self._input.pop()
+                        self.accumulator = self._input.pop(0)
                     else:
                         self.accumulator = self._word_to_index( "<eos>" )
                 
                 
+            #if it has fooled around long enough, just grade the sentance.
+            if self.nsteps > self.starting_sentance_length * 10:
+                done = True
+
             if done:
                 reward += self._grade_sentance()
-
         
         obs = self._construct_observations()
         
@@ -188,7 +238,7 @@ class Pinokio2(gym.Env):
     
     def _load_words( self ):
         #load the word information
-        with open( words_file ) as json_file:
+        with open( words_file, "rt", encoding='utf-8' ) as json_file:
             self.words = json.load(json_file)
             
     def _word_to_index( self, word ):
@@ -199,7 +249,7 @@ class Pinokio2(gym.Env):
         
     
     def _load_sentance_pairs( self ):
-        with open( sentances_file, "rt" ) as source_file_object:
+        with open( sentances_file, "rt", encoding='utf-8' ) as source_file_object:
             self.sentance_pairs = []
             for line in source_file_object:
                 new_pair = SentancePair()
@@ -228,8 +278,12 @@ class Pinokio2(gym.Env):
         self.accumulator = self._word_to_index( "uh" )
         self.dictionary = []
         self.unique_words_pulled_from_dict = []
+        self.unique_words_pushed_to_dict = []
         
     def _grade_sentance( self ):
+        test_output = [x for x in self.output if x != self._word_to_index( "<eos>" ) ]
+        correct_output = [x for x in self.selected_pair.output if x != self._word_to_index( "<eos>" ) ]
+        
         #K.  I will give a -1 for every word output.  +1000 points for every correct match and then with the list of ommisions and extras +100 points for each extra word which is in the list of ommitions.
         STATE_PASSING_CORRECT_OUTPUT = 0
         STATE_PASSING_TEST_OUTPUT = 1
@@ -250,7 +304,7 @@ class Pinokio2(gym.Env):
         this_result.previous = None
         this_result.state = STATE_MATCH
         this_result.content = -1
-        for test_index, test_word in enumerate(self.output):
+        for test_index, test_word in enumerate(test_output):
             this_result = lineCompIndex()
             this_comp_line.append( this_result )
             this_result.errorCount = test_index+1
@@ -258,7 +312,7 @@ class Pinokio2(gym.Env):
             this_result.state=STATE_PASSING_TEST_OUTPUT
             this_result.content = test_word
             
-        for correct_index, correct_word in enumerate(self.selected_pair.output):
+        for correct_index, correct_word in enumerate(correct_output):
             last_comp_line = this_comp_line
             this_comp_line = []
             this_result = lineCompIndex()
@@ -268,7 +322,7 @@ class Pinokio2(gym.Env):
             this_result.state = STATE_PASSING_CORRECT_OUTPUT
             this_result.content = correct_word
             
-            for test_index, test_word in enumerate(self.output):
+            for test_index, test_word in enumerate(test_output):
                 this_result = lineCompIndex()
                 this_comp_line.append( this_result )
                 
@@ -303,14 +357,49 @@ class Pinokio2(gym.Env):
         
         
         reward = 0
+        #1000 points for each mach
         reward = 1000 * matches
         
+        #100 points for each extra word which counts.
         for extra_word in extra_words:
             if extra_word in skipped_outputs:
                 reward += 100
                 skipped_outputs.remove(extra_word)
+            else:
+                #-100 points for every extra word which doesn't count
+                reward -= 100
                 
         return reward
         
         
         
+def main():
+    save_file = "pinokio2.save"
+
+    env = Pinokio2()
+    # Optional: PPO2 requires a vectorized environment to run
+    # the env is now wrapped automatically when passing it to the constructor
+    # env = DummyVecEnv([lambda: env])
+
+    if os.path.exists( save_file ):
+        model = PPO2.load( save_file, env=DummyVecEnv([lambda:env]) )
+    else:
+        model = PPO2(MlpPolicy, env, verbose=1)
+
+    while True:
+        #model.learn(total_timesteps=10000)
+        model.learn(total_timesteps=10000)
+
+        model.save( save_file )
+
+        obs = env.reset()
+        for i in range(200):
+            action, _states = model.predict(obs)
+            obs, reward, done, info = env.step(action)
+            env.render()
+            if done:
+                print( "resetting because " + str(done) )
+                env.reset()
+
+if __name__ == "__main__":
+    main()

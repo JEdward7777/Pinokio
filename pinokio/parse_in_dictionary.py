@@ -1,7 +1,7 @@
 import os, json
 import xml.etree.ElementTree as ET
 
-def parse_diciontary( source_xml, target_json ):
+def parse_dictionary( source_xml, target_json ):
     #make the target file if it doesn't already exist
     if not os.path.exists(target_json):
         with open(target_json, 'w'): pass
@@ -46,7 +46,7 @@ def parse_diciontary( source_xml, target_json ):
 
 
 def tame( word ):
-    punks = ['!','?','.',',','¡','¿', ')', '(', ';', '-', '[', ']', '\\', '/', '"', ':', "'", "@", "=", "~", " ", "”", "»", "’" ]
+    punks = ['!','?','.',',','¡','¿', ')', '(', ';', '-', '[', ']', '\\', '/', '"', ':', "'", "@", "=", "~", " ", "”", "»", "’", "“" ]
     while len( word ) > 0 and word[-1] in punks:
         word = word[:-1]
     while len( word ) > 0 and word[0] in punks:
@@ -60,7 +60,7 @@ def get_or_make_entry( data, word ):
     #find the last index used if it hasn't been found yet.
     if len( last_index_used ) == 0:
         last_index_used.append(-1)
-        for word,index in data['word_to_index'].items():
+        for _,index in data['word_to_index'].items():
             if index > last_index_used[0]: last_index_used[0] = index
 
     #Create the entry if it isn't there already.
@@ -83,7 +83,7 @@ def get_or_make_entry( data, word ):
 def main():
     source_xml = "/home/lansford/Sync/projects/tf_over/pinokio/es-en.xml"
     target_json = "words.json"
-    parse_diciontary( source_xml, target_json )
+    parse_dictionary( source_xml, target_json )
 
 if __name__ == "__main__":
     main()

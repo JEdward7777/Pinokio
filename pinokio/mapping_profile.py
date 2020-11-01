@@ -2,7 +2,7 @@ import parse_in_dictionary, json
 import JLDiff
 profile_output = "profile.html"
 sentances_file = "../spa-eng/spa.txt"
-words_file = 'words_edited.json'
+words_file = 'words_edited2.json'
 LOAD_LIMIT = 1000
 
 class SentancePair:
@@ -132,9 +132,10 @@ def find_problems():
 
         if any( o not in start_blob for o in pair.output ):
             print( "Problem in pair_num {}.".format( pair_num ) )
-            print( "input: \"" + " ".join( index_to_word(words,w) + ":" + str(w) for w in pair._input) + "\"" )
             print( "start_blob: \"" + " ".join( index_to_word(words,w) + ":" + str(w) for w in start_blob) + "\"" )
             print( "output: \"" + " ".join( index_to_word(words,w) + ":" + str(w) for w in pair.output) + "\"" )
+            print( "input: \"" + " ".join( index_to_word(words,w) for w in pair._input) + "\"" )
+            print( "input: \"" + " ".join( index_to_word(words,w) + ":" + str(w) for w in pair._input) + "\"" )
             
             print( "The following words in the output can't be produced" )
             for o in pair.output:
@@ -144,19 +145,40 @@ def find_problems():
 
             print()
 
+            
             for o in (o for o in pair.output if o not in start_blob):
-                code = input( "Where do you want to stuff {}\n> ".format(index_to_word(words, o) + ":" + str(o) ))
+                if len(pair._input) == 1:
+                    code = pair._input[0]
+                else:
+                    code == -1
+                    while code == -1:
+                        code = input( "Where do you want to stuff \"{}\"?  -1 save.\n> ".format(index_to_word(words, o) + ":" + str(o) ))
+                        if code == -1:
+                            print( "saving...")
+                            save_words( words )
+                
                 print( "Stuffing {} into {}.".format( index_to_word(words, o) + ":" + str(o), index_to_word( words, code) + ":" + str(code) ))
 
-                words["index_to_word"][str(code)]["dict"].insert(0,code)
+                words["index_to_word"][str(code)]["dict"].insert(0,o)
 
-            print( "saving...")
+            print()
+            print()
+            
+            if pair_num % 10 == 0:
+                print( "saving...")
+                save_words( words )
 
-            save_words( words )
         
             #raise Exception( "Not passable")
                 
 
+def dump_dictionaries():
+    words = load_words()
+    for word in words["index_to_word"].values():
+        word["dict"].clear()
+    save_words(words)
+
+    
 
 def main():
     write_profile()
@@ -165,4 +187,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    #main()
+    dump_dictionaries()

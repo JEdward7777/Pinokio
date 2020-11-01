@@ -10,6 +10,18 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Test JLDiff",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/JLDiff.py",
+            "console": "integratedTerminal",
+            "args": [
+                "docker_zoo.sh",
+                "pinokio_run.bat",
+                "diff.html"
+            ]
         }
     ]
 }
