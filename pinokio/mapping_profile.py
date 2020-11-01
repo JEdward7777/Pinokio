@@ -1,7 +1,7 @@
 import parse_in_dictionary, json
 import JLDiff
 profile_output = "profile.html"
-sentances_file = "../spa-eng/spa.txt"
+sentances_file = "../spa-eng/spa_edited.txt"
 words_file = 'words_edited2.json'
 LOAD_LIMIT = 1000
 
@@ -150,9 +150,9 @@ def find_problems():
                 if len(pair._input) == 1:
                     code = pair._input[0]
                 else:
-                    code == -1
+                    code = -1
                     while code == -1:
-                        code = input( "Where do you want to stuff \"{}\"?  -1 save.\n> ".format(index_to_word(words, o) + ":" + str(o) ))
+                        code = int(input( "\"{}\"?  -1 save.\n> ".format(index_to_word(words, o) + ":" + str(o) )))
                         if code == -1:
                             print( "saving...")
                             save_words( words )
@@ -187,5 +187,5 @@ def main():
 
 
 if __name__ == "__main__":
-    #main()
-    dump_dictionaries()
+    main()
+    #dump_dictionaries()
