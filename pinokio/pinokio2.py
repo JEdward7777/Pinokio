@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import random, os
 import gym, math, json
 import numpy as np
@@ -8,9 +9,9 @@ from stable_baselines.common.policies import MlpPolicy
 from stable_baselines.common.vec_env import DummyVecEnv
 from stable_baselines import PPO2
 
-words_file = 'words.json'
+words_file = 'words_edited2.json'
 #sentances_file = "/home/lansford/Sync/projects/tf_over/pinokio/Pinokio/spa-eng/spa.txt"
-sentances_file = "../spa-eng/spa.txt"
+sentances_file = "../spa-eng/spa_edited.txt"
 
 class SentancePair:
     _input = None
@@ -26,6 +27,11 @@ OUTPUT = 1
 STACK = 2
 DIC = 3
 INPUT = 4
+
+
+NUM_PAIRS = 100
+
+
 
 class Pinokio2(gym.Env):
     nsteps = 0
@@ -49,25 +55,52 @@ class Pinokio2(gym.Env):
 
 
     last_actions = None
+    
+    def clone( self ):
+        result = Pinokio2( skip_load=True )
+        result.nsteps = self.nsteps
+        result.words = self.words
+        result.starting_sentance_length = self.starting_sentance_length
+        result.unique_words_pulled_from_stack = self.unique_words_pulled_from_stack
+        result.unique_words_pulled_from_dict = self.unique_words_pulled_from_dict
+        result.unique_words_pushed_to_dict = self.unique_words_pushed_to_dict
+        result.output = self.output[:]
+        result.stack = self.stack[:]
+        result._input = self._input[:]
+        result.accumulator = self.accumulator
+        result.dictionary = self.dictionary.copy()
+        result.sentance_pairs = self.sentance_pairs
+        result.selected_pair = self.selected_pair
+        return result
+    
+    def hash_string( self ):
+        #return "{}{}{}{}{}{}".format( self.nsteps, self.output, self.stack, self._input, self.accumulator, self.dictionary )
+        return "{}{}{}{}{}".format( self.output, self.stack, self._input, self.accumulator, self.dictionary )
+    
+    def translate_word( self, word ):
+        return self.words['index_to_word'][str(word)]['word']
+    
+    def translate_list( self, word_list ):
+        return [self.words['index_to_word'][str(word)]['word'] for word in word_list ]  
+
 
     def render( self ):
 
         action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
         what_dec = {NOOP: "nothing", OUTPUT:"output",STACK:"stack",DIC:"dic",INPUT:"input"}
-        print( action_dec[self.last_actions[0]] + " " + what_dec[self.last_actions[1]] )
-
-
-        def translate_list( word_list ):
-            return [self.words['index_to_word'][str(word)]['word'] for word in word_list ]
+        if(self.last_actions): print( action_dec[self.last_actions[0]] + " " + what_dec[self.last_actions[1]] )
 
 
 
 
-        print( ("output = [ " + str(translate_list( self.output )) + "]").encode('utf8') )
-        print( ("stack = [ " + str(translate_list( self.stack )) + "]").encode('utf8') )
-        print( ("input = [ " + str(translate_list( self._input )) + "]").encode('utf8') )
-        print( ("accumulator = " + str(translate_list( [self.accumulator] ))).encode('utf8'))
-        print( ("dictionary = [ " + str(translate_list( self.dictionary )) + "]").encode('utf8') )
+
+
+
+        print( ("output = [ " + str(self.translate_list( self.output )) + "]").encode('utf8') )
+        print( ("stack = [ " + str(self.translate_list( self.stack )) + "]").encode('utf8') )
+        print( ("input = [ " + str(self.translate_list( self._input )) + "]").encode('utf8') )
+        print( ("accumulator = " + str(self.translate_list( [self.accumulator] ))).encode('utf8'))
+        print( ("dictionary = [ " + str(self.translate_list( self.dictionary )) + "]").encode('utf8') )
         
     
 
@@ -76,7 +109,7 @@ class Pinokio2(gym.Env):
             return
         
         self._load_words()
-        self._load_sentance_pairs()
+        self._load_sentance_pairs(NUM_PAIRS)
         
         #0: which action 0 noop 1 push 2 pull
         #1: what thing   0 noop 1 output, 2 stack, 3 dictionary, 4 input
@@ -223,7 +256,7 @@ class Pinokio2(gym.Env):
                 
                 
             #if it has fooled around long enough, just grade the sentance.
-            if self.nsteps > self.starting_sentance_length * 10:
+            if self.nsteps > self.starting_sentance_length * 20:
                 done = True
 
             if done:
@@ -248,7 +281,7 @@ class Pinokio2(gym.Env):
             )["index"]
         
     
-    def _load_sentance_pairs( self ):
+    def _load_sentance_pairs( self, count=-1 ):
         with open( sentances_file, "rt", encoding='utf-8' ) as source_file_object:
             self.sentance_pairs = []
             for line in source_file_object:
@@ -262,6 +295,9 @@ class Pinokio2(gym.Env):
                     new_pair.output.append( self._word_to_index( word )  )
                     
                 self.sentance_pairs.append( new_pair )
+
+                if count > 0 and len(self.sentance_pairs) >= count:
+                    return
                     
         
     
@@ -280,7 +316,7 @@ class Pinokio2(gym.Env):
         self.unique_words_pulled_from_dict = []
         self.unique_words_pushed_to_dict = []
         
-    def _grade_sentance( self ):
+    def _grade_sentance( self, talk=False ):
         test_output = [x for x in self.output if x != self._word_to_index( "<eos>" ) ]
         correct_output = [x for x in self.selected_pair.output if x != self._word_to_index( "<eos>" ) ]
         
@@ -359,22 +395,25 @@ class Pinokio2(gym.Env):
         reward = 0
         #1000 points for each mach
         reward = 1000 * matches
+        if talk: print( "{} matches so {} points".format( matches, reward ) )
         
         #100 points for each extra word which counts.
         for extra_word in extra_words:
             if extra_word in skipped_outputs:
                 reward += 100
+                if talk: print( "\"{}\" correct word in wrong spot 100 more points, total is {}".format( self.translate_word(extra_word), reward ) )
                 skipped_outputs.remove(extra_word)
             else:
                 #-100 points for every extra word which doesn't count
                 reward -= 100
+                if talk: print( "\"{}\" extra uneeded word.  Lost 100 points, total is {}".format( self.translate_word(extra_word), reward ) )
                 
         return reward
         
         
+save_file = "pinokio2.save"
         
 def main():
-    save_file = "pinokio2.save"
 
     env = Pinokio2()
     # Optional: PPO2 requires a vectorized environment to run
