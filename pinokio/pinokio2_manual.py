@@ -1,5 +1,5 @@
 import pinokio2
-import pinokio2_depthsearch
+import pinokio2_brutesearch
 
 def main():
     env = pinokio2.Pinokio2()
@@ -44,24 +44,8 @@ def main():
         elif command == "hash_string":
             print( env.hash_string() )
             
-        elif command.startswith("depthsearch"):
-            search_depth = pinokio2_depthsearch.MAX_DEPTH
-            try:
-                arg = command[len("depthsearch"):].strip()
-                search_depth = int(arg)
-            except ValueError:
-                pass
-            
-            
-            action, value, best_output = pinokio2_depthsearch.depth_search(env,search_depth)
-            print( "depthsearch best_output of {}".format( env.translate_list(best_output) )  )
-            print( "depthsearch best_value of {}".format( value ) )
-            env_clone = env.clone()
-            env_clone.step(action)
-            env_clone.render()
-            
         elif command.startswith("breadthsearch"):
-            action, value, best_output = pinokio2_depthsearch.breadth_search(env)
+            action, value, best_output = pinokio2_brutesearch.breadth_search(env)
             print( "breadth_search best_output of {}".format( env.translate_list(best_output) )  )
             print( "breadth_search best_value of {}".format( value ) )
             env_clone = env.clone()
