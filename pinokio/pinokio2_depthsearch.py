@@ -110,56 +110,9 @@ def breadth_search( root, talk=True ):
     return (best_action, best_value, best_output)    
         
 
-def depth_search( pinokio, depth, stash={} ):
-    
-    hash_string = pinokio.hash_string()
-    if True:#not hash_string in stash:
-        best_value = -math.inf
-        best_action = None
-        best_output = None
-        
-        for which_action in [pinokio2.PUSH_TO,pinokio2.PULL_FROM]:
-            for what_thing in [pinokio2.OUTPUT,pinokio2.STACK,pinokio2.DIC,pinokio2.INPUT]:
-                if which_action == pinokio2.PUSH_TO and what_thing == pinokio2.INPUT:
-                    pass
-                else:
-                    pinokio_copy = pinokio.clone()
-                    #obs, value, done, _ = pinokio_copy.step( (which_action,what_thing) )
-                    obs, _, done, _ = pinokio_copy.step( (which_action,what_thing) )
-                    test_output = pinokio_copy.output
-                    
-                    
-                    if done:
-                        value = pinokio._grade_sentance()
-                    elif depth <= 0:
-                        value = pinokio._grade_sentance()/10
-                    else:
-                        _, rec_value,test_output = depth_search( pinokio_copy,depth-1, stash )
-                        #value += rec_value
-                        value = rec_value - .01 #take a bit off so that it doesn't waist moves.
-                    
-                        
-                        
-                    if value > best_value:
-                        best_value = value
-                        best_action = (which_action,what_thing)
-                        best_output = test_output
-        if not hash_string in stash:
-            stash[hash_string] = (best_action, best_value, best_output)
-        else:
-            if stash[hash_string] != (best_action, best_value, best_output):
-                print( "stash problem." )
-                stash_best_action, stash_best_value, stash_best_output = stash[hash_string]
-                print( "best_action {} {}".format(stash_best_action, best_action ) )
-                print( "best_value {} {}".format(stash_best_value, best_value ) )
-                print( "best_output {} {}".format( pinokio.translate_list(stash_best_output), pinokio.translate_list(best_output) ) )
-            
-    
-                    
-    return stash[hash_string]
 
 
-MAX_DEPTH = 5
+
 def main():
     env = pinokio2.Pinokio2()
     
