@@ -1,9 +1,11 @@
 import pinokio2_brutesearch
 import pinokio2
 import os
-from stable_baselines.common.policies import MlpPolicy
-from stable_baselines.common.vec_env import DummyVecEnv
+from stable_baselines.common.policies import MlpPolicy, MlpLstmPolicy
+from stable_baselines.common.vec_env import DummyVecEnv, SubprocVecEnv
 from stable_baselines import PPO2
+
+use_lstm = True
 
 class Pinokio3(pinokio2.Pinokio2):
     last_results = None
@@ -42,6 +44,9 @@ class Pinokio3(pinokio2.Pinokio2):
         if done:
             #reward = inner_reward
             reward = self._grade_sentance()
+        elif action[0] == 0 or action[1] == 0:
+            #don't like doing nothing.
+            reward = 0
         elif not after_results.found_it:
             reward = 0#-10
             
@@ -49,7 +54,7 @@ class Pinokio3(pinokio2.Pinokio2):
             done = True
         else:
             if after_results.num_steps < self.last_results.num_steps:
-                reward = 3#1
+                reward = 10#1
             elif after_results.num_steps == self.last_results.num_steps:
                 reward = 2
             else:
@@ -59,8 +64,11 @@ class Pinokio3(pinokio2.Pinokio2):
         print( "returning reward {} done {}.  Loop count {}".format( reward, done, after_results.loop_count ) )
         return obs, reward, done, info
         
-
-save_file = "pinokio3.save"
+if use_lstm:
+    save_file = "pinokio3lstm.save"
+else:
+    save_file = "pinokio3.save"
+    
 def main():
 
     env = Pinokio3()
@@ -69,9 +77,15 @@ def main():
     # env = DummyVecEnv([lambda: env])
 
     if os.path.exists( save_file ):
-        model = PPO2.load( save_file, env=DummyVecEnv([lambda:env]) )
+        if use_lstm:
+            model = PPO2.load( save_file, env=SubprocVecEnv([lambda:env,lambda:env.clone(),lambda:env.clone(),lambda:env.clone()]) )
+        else:
+            model = PPO2.load( save_file, env=DummyVecEnv([lambda:env]) )
     else:
-        model = PPO2(MlpPolicy, DummyVecEnv([lambda:env]), verbose=1)
+        if use_lstm:
+            model = PPO2(MlpLstmPolicy, SubprocVecEnv([lambda:env,lambda:env.clone(),lambda:env.clone(),lambda:env.clone()]), verbose=1)
+        else:
+            model = PPO2(MlpPolicy, DummyVecEnv([lambda:env]), verbose=1)
 
     while True:
         model.learn(total_timesteps=1000)
