@@ -88,7 +88,7 @@ class Pinokio2(gym.Env):
 
         action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
         what_dec = {NOOP: "nothing", OUTPUT:"output",STACK:"stack",DIC:"dic",INPUT:"input"}
-        if(self.last_actions): print( action_dec[self.last_actions[0]] + " " + what_dec[self.last_actions[1]] )
+        if self.last_actions is not None: print( action_dec[self.last_actions[0]] + " " + what_dec[self.last_actions[1]] )
 
 
 
@@ -101,6 +101,7 @@ class Pinokio2(gym.Env):
         print( ("input = [ " + str(self.translate_list( self._input )) + "]").encode('utf8') )
         print( ("accumulator = " + str(self.translate_list( [self.accumulator] ))).encode('utf8'))
         print( ("dictionary = [ " + str(self.translate_list( self.dictionary )) + "]").encode('utf8') )
+        print( ("nsteps = [ " + str(self.nsteps) + "]").encode('utf8') )
         
     
 

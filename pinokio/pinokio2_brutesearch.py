@@ -1,6 +1,15 @@
 import math
 import pinokio2
 
+class BreadthSearchResults:
+    best_action = None
+    best_value = -math.inf
+    best_output = None
+    num_steps = math.inf
+    loop_count = 0
+    
+MAX_LOOPAGE = 10000
+    
 def breadth_search( root, talk=True ):
     #construct target_sentance with eos on it.
     eos = root._word_to_index( "<eos>" )
@@ -21,7 +30,11 @@ def breadth_search( root, talk=True ):
     
     #keep looping while we have hashes still in the queue.
     found_it = False
+    loop_count = 0
     while queue and not found_it:
+        loop_count += 1
+        if loop_count > MAX_LOOPAGE: break
+    
         pinokio = search_space[queue.pop(0)]
         
         if talk: 
@@ -104,14 +117,18 @@ def breadth_search( root, talk=True ):
         for state in reversed(route): state.render()
     
     
-    best_action = second_state.last_actions
     best_output = best_state.output
+    
+    result = BreadthSearchResults()
+    result.best_action = second_state.last_actions
+    result.best_value = best_value
+    result.best_output = best_state.output
+    result.num_steps = len( route )
+    result.found_it = found_it
+    result.loop_count = loop_count
         
-    return (best_action, best_value, best_output)    
+    return result 
         
-
-
-
 
 def main():
     env = pinokio2.Pinokio2()
@@ -119,11 +136,11 @@ def main():
     obs = env.reset()
     while True:
         
-        action, value, best_output = breadth_search(env,talk=False)
-        print( "Targeting output {} with value {}".format( env.translate_list(best_output ), value ) )
+        search_result = breadth_search(env,talk=False)
+        print( "Targeting output {} with value {}".format( env.translate_list(search_result.best_output ), search_result.best_value ) )
         print( "The correct output is {}".format( env.translate_list(env.selected_pair.output) ) )
         
-        obs, reward, done, info = env.step(action)
+        obs, reward, done, info = env.step(search_result.best_action)
         env.render()
         if done:
             print( "resetting because " + str(done) )

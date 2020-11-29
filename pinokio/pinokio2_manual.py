@@ -45,11 +45,11 @@ def main():
             print( env.hash_string() )
             
         elif command.startswith("breadthsearch"):
-            action, value, best_output = pinokio2_brutesearch.breadth_search(env)
-            print( "breadth_search best_output of {}".format( env.translate_list(best_output) )  )
-            print( "breadth_search best_value of {}".format( value ) )
+            search_result = pinokio2_brutesearch.breadth_search(env)
+            print( "breadth_search best_output of {}".format( env.translate_list(search_result.best_output) )  )
+            print( "breadth_search best_value of {}".format( search_result.best_value ) )
             env_clone = env.clone()
-            env_clone.step(action)
+            env_clone.step(search_result.best_action)
             env_clone.render()
         
         elif which_action and what_thing:
