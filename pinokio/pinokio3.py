@@ -62,10 +62,11 @@ class Pinokio3(pinokio2.Pinokio2):
         self.last_results = after_results
         
         print( "returning reward {} done {}.  Loop count {}".format( reward, done, after_results.loop_count ) )
+        self.render()
         return obs, reward, done, info
         
 if use_lstm:
-    save_file = "pinokio3lstm.save"
+    save_file = "pinokio3lstm_1.save"
 else:
     save_file = "pinokio3.save"
     
@@ -78,12 +79,12 @@ def main():
 
     if os.path.exists( save_file ):
         if use_lstm:
-            model = PPO2.load( save_file, env=SubprocVecEnv([lambda:env,lambda:env.clone(),lambda:env.clone(),lambda:env.clone()]) )
+            model = PPO2.load( save_file, env=SubprocVecEnv([lambda:env]) )
         else:
             model = PPO2.load( save_file, env=DummyVecEnv([lambda:env]) )
     else:
         if use_lstm:
-            model = PPO2(MlpLstmPolicy, SubprocVecEnv([lambda:env,lambda:env.clone(),lambda:env.clone(),lambda:env.clone()]), verbose=1)
+            model = PPO2(MlpLstmPolicy, SubprocVecEnv([lambda:env]), verbose=1, nminibatches=1)
         else:
             model = PPO2(MlpPolicy, DummyVecEnv([lambda:env]), verbose=1)
 
@@ -91,7 +92,7 @@ def main():
         model.learn(total_timesteps=1000)
 
         model.save( save_file )
-        print( "potato" )
+        print( "saved" )
 
         #obs = env.reset()
         #for i in range(200):

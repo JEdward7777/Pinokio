@@ -9,8 +9,9 @@ def main():
     
     if pinokio3.use_lstm:
         env = pinokio3.Pinokio3()
-        env_vec = DummyVecEnv([lambda:env,lambda:env.clone(),lambda:env.clone(),lambda:env.clone()])
-        model = PPO2.load( pinokio3.save_file, env=env_vec )
+        #env_vec = DummyVecEnv([lambda:env,lambda:env.clone(),lambda:env.clone(),lambda:env.clone()])
+        env_vec = DummyVecEnv([lambda:env])
+        model = PPO2.load( pinokio3.save_file, env=env_vec, nminibatches=1 )
     else:
         env = pinokio3.Pinokio3()
         model = PPO2.load( pinokio3.save_file, env=DummyVecEnv([lambda:env]) )
@@ -20,7 +21,8 @@ def main():
         print( "obs are {}".format( obs ) )
         
         if pinokio3.use_lstm:
-            action, _states = model.predict(np.stack((obs,obs,obs,obs)))
+            #action, _states = model.predict(np.stack((obs,obs,obs,obs)))
+            action, _states = model.predict(obs)
             action = action[0]
         else:
             action, _states = model.predict(obs)
