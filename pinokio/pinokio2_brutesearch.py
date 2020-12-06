@@ -11,10 +11,15 @@ class BreadthSearchResults:
 MAX_LOOPAGE = 10000
     
 def breadth_search( root, talk=True ):
-    #construct target_sentance with eos on it.
+    #construct target_sentances with eos on it.
     eos = root._word_to_index( "<eos>" )
-    target_sentance = root.selected_pair.output[:]
-    if not target_sentance[-1] == eos: target_sentance.append(eos)
+    target_sentances = []
+    max_sentance_length = 0
+    for target_sentance in root.selected_pair.outputs:
+        target_sentance = target_sentance[:]
+        if target_sentance[-1] != eos: target_sentance.append(eos)
+        target_sentances.append( target_sentance )
+        if len( target_sentance ) > max_sentance_length: max_sentance_length = len( target_sentance )
     
     
     #hahve a hash of the states from the hash string to the state.
@@ -70,13 +75,27 @@ def breadth_search( root, talk=True ):
                         
                         if talk: print( "Found better state with value {} and output {}".format( best_value, pinokio_copy.translate_list(pinokio_copy.output) ) )
                         
-                    bad_output = False
+                    
                     #we don't need to hunt down trails which have the wrong output
-                    for i in range( len( pinokio_copy.output ) ):
-                        if i >= len( target_sentance ):
-                            bad_output = True
-                        elif target_sentance[i] != pinokio_copy.output[i]:
-                            bad_output = True
+                    
+                    #assume it is bad unless we find one which matches.
+                    bad_output = True
+                    for target_sentance in target_sentances:
+                        #assume the sentance is good
+                        matches_this_one = True
+                        for i in range( len( pinokio_copy.output ) ):
+                            if i >= len(target_sentance):
+                                matches_this_one = False
+                            elif target_sentance[i] != pinokio_copy.output[i]:
+                                matches_this_one = False
+                                
+                            #don't need to prove it further if we already know it is bad
+                            if not matches_this_one: break
+                        
+                        #if we found a good one stick with it.
+                        if matches_this_one:
+                            bad_output = False
+                            break
                         
                     
                     #if we didn't finish, then possibly add to the queue
@@ -96,11 +115,8 @@ def breadth_search( root, talk=True ):
                                 search_space[ hash_string ] = pinokio_copy
                     else:
                         #stop if we found the actuall answer
-                        if pinokio_copy.output == target_sentance:
-                            #found it!
-                            if talk: print( "Found it" )
-                            found_it = True
-                            break
+                        if best_state.output in target_sentances: found_it = True
+                        if found_it: break
             if found_it: break
                             
     #now find out what the first best action was.
@@ -137,8 +153,8 @@ def main():
     while True:
         
         search_result = breadth_search(env,talk=False)
-        print( "Targeting output {} with value {}".format( env.translate_list(search_result.best_output ), search_result.best_value ) )
-        print( "The correct output is {}".format( env.translate_list(env.selected_pair.output) ) )
+        print( "Targeting output {} with value {} and loop of {}".format( env.translate_list(search_result.best_output ), search_result.best_value, search_result.loop_count ) )
+        print( "The correct outputs are {}".format( [env.translate_list(x) for x in env.selected_pair.outputs] ) )
         
         obs, reward, done, info = env.step(search_result.best_action)
         env.render()

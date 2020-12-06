@@ -15,10 +15,10 @@ sentances_file = "../spa-eng/spa_edited.txt"
 
 class SentancePair:
     _input = None
-    output = None
+    outputs = None
     def __init__( self ):
         self._input = []
-        self.output = []
+        self.outputs = []
     
 NOOP = 0
 PUSH_TO = 1
@@ -283,22 +283,36 @@ class Pinokio2(gym.Env):
         
     
     def _load_sentance_pairs( self, count=-1 ):
+        sentance_pairs_dict = {}
         with open( sentances_file, "rt", encoding='utf-8' ) as source_file_object:
-            self.sentance_pairs = []
+            lines_iterated = 1
             for line in source_file_object:
-                new_pair = SentancePair()
                 english, spanish = line.strip().split( "\t" )
+                new_input = []
+                new_output = []
                 
                 for word in spanish.split( " " ):
-                    new_pair._input.append( self._word_to_index( word ) )
+                    new_input.append( self._word_to_index( word ) )
                     
                 for word in english.split(" "):
-                    new_pair.output.append( self._word_to_index( word )  )
+                    new_output.append( self._word_to_index( word )  )
                     
-                self.sentance_pairs.append( new_pair )
+                _hash = ",".join(str(new_input))
+                
+                if not _hash in sentance_pairs_dict:
+                    pair = SentancePair()
+                    sentance_pairs_dict[_hash] = pair
+                    pair._input = new_input
+                else:
+                    pair = sentance_pairs_dict[_hash]
+                
+                pair.outputs.append( new_output )
 
-                if count > 0 and len(self.sentance_pairs) >= count:
-                    return
+                if count > 0 and lines_iterated >= count:
+                    break
+                
+                lines_iterated += 1
+        self.sentance_pairs = list(sentance_pairs_dict.values())
                     
         
     
@@ -317,99 +331,110 @@ class Pinokio2(gym.Env):
         self.unique_words_pulled_from_dict = []
         self.unique_words_pushed_to_dict = []
         
+        
     def _grade_sentance( self, talk=False ):
-        test_output = [x for x in self.output if x != self._word_to_index( "<eos>" ) ]
-        correct_output = [x for x in self.selected_pair.output if x != self._word_to_index( "<eos>" ) ]
-        
-        #K.  I will give a -1 for every word output.  +1000 points for every correct match and then with the list of ommisions and extras +100 points for each extra word which is in the list of ommitions.
-        STATE_PASSING_CORRECT_OUTPUT = 0
-        STATE_PASSING_TEST_OUTPUT = 1
-        STATE_MATCH = 2
-        class lineCompIndex(object):
-            __slots__ = ['errorCount', 'previous', 'state', 'content' ]
-            def __init__( self ):
-                self.errorCount = 0
-                self.previous = None
-                self.state = STATE_MATCH
-                self.content = -1
-        
-        #This is an init below the first maches of test output words.
-        this_comp_line = []
-        this_result = lineCompIndex()
-        this_comp_line.append( this_result )
-        this_result.errorCount = 0
-        this_result.previous = None
-        this_result.state = STATE_MATCH
-        this_result.content = -1
-        for test_index, test_word in enumerate(test_output):
-            this_result = lineCompIndex()
-            this_comp_line.append( this_result )
-            this_result.errorCount = test_index+1
-            this_result.previous = this_comp_line[test_index]
-            this_result.state=STATE_PASSING_TEST_OUTPUT
-            this_result.content = test_word
+        def grade_possible_output( correct_output ):
+            test_output = [x for x in self.output if x != self._word_to_index( "<eos>" ) ]
             
-        for correct_index, correct_word in enumerate(correct_output):
-            last_comp_line = this_comp_line
+            #K.  I will give a -1 for every word output.  +1000 points for every correct match and then with the list of ommisions and extras +100 points for each extra word which is in the list of ommitions.
+            STATE_PASSING_CORRECT_OUTPUT = 0
+            STATE_PASSING_TEST_OUTPUT = 1
+            STATE_MATCH = 2
+            class lineCompIndex(object):
+                __slots__ = ['errorCount', 'previous', 'state', 'content' ]
+                def __init__( self ):
+                    self.errorCount = 0
+                    self.previous = None
+                    self.state = STATE_MATCH
+                    self.content = -1
+            
+            #This is an init below the first maches of test output words.
             this_comp_line = []
             this_result = lineCompIndex()
             this_comp_line.append( this_result )
-            this_result.errorCount = correct_index+1
-            this_result.previous = last_comp_line[0]
-            this_result.state = STATE_PASSING_CORRECT_OUTPUT
-            this_result.content = correct_word
-            
+            this_result.errorCount = 0
+            this_result.previous = None
+            this_result.state = STATE_MATCH
+            this_result.content = -1
             for test_index, test_word in enumerate(test_output):
                 this_result = lineCompIndex()
                 this_comp_line.append( this_result )
+                this_result.errorCount = test_index+1
+                this_result.previous = this_comp_line[test_index]
+                this_result.state=STATE_PASSING_TEST_OUTPUT
+                this_result.content = test_word
                 
-                if test_word == correct_word:
-                    this_result.previous = last_comp_line[test_index]
-                    this_result.errorCount = this_result.previous.errorCount
-                    this_result.state = STATE_MATCH
-                    this_result.content = test_word
-                else:
-                    if last_comp_line[test_index+1].errorCount < this_comp_line[test_index].errorCount:
-                        this_result.previous = last_comp_line[test_index+1]
-                        this_result.state = STATE_PASSING_CORRECT_OUTPUT
-                        this_result.content = correct_word
-                    else:
-                        this_result.previous = this_comp_line[test_index]
-                        this_result.state = STATE_PASSING_TEST_OUTPUT
+            for correct_index, correct_word in enumerate(correct_output):
+                last_comp_line = this_comp_line
+                this_comp_line = []
+                this_result = lineCompIndex()
+                this_comp_line.append( this_result )
+                this_result.errorCount = correct_index+1
+                this_result.previous = last_comp_line[0]
+                this_result.state = STATE_PASSING_CORRECT_OUTPUT
+                this_result.content = correct_word
+                
+                for test_index, test_word in enumerate(test_output):
+                    this_result = lineCompIndex()
+                    this_comp_line.append( this_result )
+                    
+                    if test_word == correct_word:
+                        this_result.previous = last_comp_line[test_index]
+                        this_result.errorCount = this_result.previous.errorCount
+                        this_result.state = STATE_MATCH
                         this_result.content = test_word
-                    this_result.errorCount = this_result.previous.errorCount + 1
-                
-        skipped_outputs = []
-        extra_words = []
-        matches = 0
-        node = this_result
-        while node.previous:
-            if node.state == STATE_MATCH:
-                matches += 1
-            elif node.state == STATE_PASSING_CORRECT_OUTPUT:
-                skipped_outputs.append( node.content )
-            else:
-                extra_words.append( node.content )
-            node = node.previous
+                    else:
+                        if last_comp_line[test_index+1].errorCount < this_comp_line[test_index].errorCount:
+                            this_result.previous = last_comp_line[test_index+1]
+                            this_result.state = STATE_PASSING_CORRECT_OUTPUT
+                            this_result.content = correct_word
+                        else:
+                            this_result.previous = this_comp_line[test_index]
+                            this_result.state = STATE_PASSING_TEST_OUTPUT
+                            this_result.content = test_word
+                        this_result.errorCount = this_result.previous.errorCount + 1
+                    
+            skipped_outputs = []
+            extra_words = []
+            matches = 0
+            node = this_result
+            while node.previous:
+                if node.state == STATE_MATCH:
+                    matches += 1
+                elif node.state == STATE_PASSING_CORRECT_OUTPUT:
+                    skipped_outputs.append( node.content )
+                else:
+                    extra_words.append( node.content )
+                node = node.previous
+            
+            
+            reward = 0
+            #1000 points for each mach
+            reward = 1000 * matches
+            if talk: print( "{} matches so {} points".format( matches, reward ) )
+            
+            #100 points for each extra word which counts.
+            for extra_word in extra_words:
+                if extra_word in skipped_outputs:
+                    reward += 100
+                    if talk: print( "\"{}\" correct word in wrong spot 100 more points, total is {}".format( self.translate_word(extra_word), reward ) )
+                    skipped_outputs.remove(extra_word)
+                else:
+                    #-100 points for every extra word which doesn't count
+                    reward -= 100
+                    if talk: print( "\"{}\" extra uneeded word.  Lost 100 points, total is {}".format( self.translate_word(extra_word), reward ) )
+                    
+            return reward
         
-        
-        reward = 0
-        #1000 points for each mach
-        reward = 1000 * matches
-        if talk: print( "{} matches so {} points".format( matches, reward ) )
-        
-        #100 points for each extra word which counts.
-        for extra_word in extra_words:
-            if extra_word in skipped_outputs:
-                reward += 100
-                if talk: print( "\"{}\" correct word in wrong spot 100 more points, total is {}".format( self.translate_word(extra_word), reward ) )
-                skipped_outputs.remove(extra_word)
-            else:
-                #-100 points for every extra word which doesn't count
-                reward -= 100
-                if talk: print( "\"{}\" extra uneeded word.  Lost 100 points, total is {}".format( self.translate_word(extra_word), reward ) )
-                
-        return reward
+        best_result = None
+        for correct_output in self.selected_pair.outputs:
+            correct_output = [x for x in correct_output if x != self._word_to_index( "<eos>" ) ]
+            this_result = grade_possible_output( correct_output )
+            #print( "this_result {}".format( this_result ) )
+            if best_result is None or this_result > best_result:
+                best_result = this_result
+        #print( "best_result {} self.selected_pair.outputs.length {} self.selected_pair._input {}".format(best_result,len(self.selected_pair.outputs),self.selected_pair._input) )
+        return best_result
         
         
 save_file = "pinokio2.save"
@@ -428,12 +453,12 @@ def main():
 
     while True:
         #model.learn(total_timesteps=10000)
-        model.learn(total_timesteps=10000)
+        model.learn(total_timesteps=100000)
 
         model.save( save_file )
 
         obs = env.reset()
-        for i in range(200):
+        for i in range(10):
             action, _states = model.predict(obs)
             obs, reward, done, info = env.step(action)
             env.render()
