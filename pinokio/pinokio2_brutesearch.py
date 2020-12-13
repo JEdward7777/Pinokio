@@ -166,7 +166,8 @@ def breadth_search( root, talk=True ):
     result.num_steps = len( route )
     result.found_it = found_it
     result.loop_count = loop_count
-    result.best_output_state = best_state
+    #This uses a lot of memory to keep this, useful for debugging.
+    #result.best_output_state = best_state
         
     return result 
         

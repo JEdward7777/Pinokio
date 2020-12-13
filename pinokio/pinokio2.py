@@ -78,8 +78,8 @@ class Pinokio2(gym.Env):
     def hash_string( self ):
         #return "{}{}{}{}{}{}".format( self.nsteps, self.output, self.stack, self._input, self.accumulator, self.dictionary )
         result = "{}{}{}{}{}".format( self.output, self.stack, self._input, self.accumulator, self.dictionary )
-        print( result )
-        self.render()
+        #print( result )
+        #self.render()
         return result
     
     def translate_word( self, word ):

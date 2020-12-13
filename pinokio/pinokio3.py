@@ -63,18 +63,18 @@ class Pinokio3(pinokio2.Pinokio2):
             else:
                 reward = 1#-1
         
-        if reward > 2:
-            print( "=====v" )
-            print( "Before it is" )
-            print( before_step_render )
-            print( "Before string of steps:" )
-            print( str(self.last_results) )
-            print( "After string of steps:" )
-            print( str(after_results) )
-            print( "last_results.num_steps {} after_results.num_steps {} shooting for output {} correct outputs are {}".format( self.last_results.num_steps, after_results.num_steps, str(self.translate_list(after_results.best_output)).encode(), [self.translate_list(x) for x in self.selected_pair.outputs]  ) )
-            print( "returning reward {} done {}.  Loop count {} action {}".format( reward, done, after_results.loop_count, self.decode_action(action) ) )
-            self.render()
-            print( "=====^" )
+        # if reward > 2:
+        #     print( "=====v" )
+        #     print( "Before it is" )
+        #     print( before_step_render )
+        #     print( "Before string of steps:" )
+        #     print( str(self.last_results) )
+        #     print( "After string of steps:" )
+        #     print( str(after_results) )
+        #     print( "last_results.num_steps {} after_results.num_steps {} shooting for output {} correct outputs are {}".format( self.last_results.num_steps, after_results.num_steps, str(self.translate_list(after_results.best_output)).encode(), [self.translate_list(x) for x in self.selected_pair.outputs]  ) )
+        #     print( "returning reward {} done {}.  Loop count {} action {}".format( reward, done, after_results.loop_count, self.decode_action(action) ) )
+        #     self.render()
+        #     print( "=====^" )
             
             
         self.last_results = after_results
@@ -109,14 +109,14 @@ def main():
         model.save( save_file )
         print( "saved" )
 
-        #obs = env.reset()
-        #for i in range(200):
-            #action, _states = model.predict(obs)
-            #obs, reward, done, info = env.step(action)
-            #env.render()
-            #if done:
-                #print( "resetting because " + str(done) )
-                #env.reset()
+        obs = env.reset()
+        for i in range(20):
+            action, _states = model.predict(obs)
+            obs, reward, done, info = env.step(action)
+            env.render()
+            if done:
+                print( "resetting because " + str(done) )
+                env.reset()
 
 if __name__ == "__main__":
     main()
