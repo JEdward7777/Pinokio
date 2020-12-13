@@ -28,6 +28,9 @@ class Pinokio3(pinokio2.Pinokio2):
 
 
     def step(self, action):
+        
+        before_step_render = self.str_render()
+        
         if self.last_results is None:
             #self.last_results = pinokio2_brutesearch.breadth_search( self, talk=False )
             self.last_results = self.brutesearch_cached( talk=False ) 
@@ -59,10 +62,22 @@ class Pinokio3(pinokio2.Pinokio2):
                 reward = 2
             else:
                 reward = 1#-1
-        self.last_results = after_results
         
-        print( "returning reward {} done {}.  Loop count {}".format( reward, done, after_results.loop_count ) )
-        self.render()
+        if reward > 2:
+            print( "=====v" )
+            print( "Before it is" )
+            print( before_step_render )
+            print( "Before string of steps:" )
+            print( str(self.last_results) )
+            print( "After string of steps:" )
+            print( str(after_results) )
+            print( "last_results.num_steps {} after_results.num_steps {} shooting for output {} correct outputs are {}".format( self.last_results.num_steps, after_results.num_steps, str(self.translate_list(after_results.best_output)).encode(), [self.translate_list(x) for x in self.selected_pair.outputs]  ) )
+            print( "returning reward {} done {}.  Loop count {} action {}".format( reward, done, after_results.loop_count, self.decode_action(action) ) )
+            self.render()
+            print( "=====^" )
+            
+            
+        self.last_results = after_results
         return obs, reward, done, info
         
 if use_lstm:

@@ -32,6 +32,8 @@ INPUT = 4
 NUM_PAIRS = 100
 
 
+action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
+what_dec = {NOOP: "nothing", OUTPUT:"output",STACK:"stack",DIC:"dic",INPUT:"input"}
 
 class Pinokio2(gym.Env):
     nsteps = 0
@@ -75,7 +77,10 @@ class Pinokio2(gym.Env):
     
     def hash_string( self ):
         #return "{}{}{}{}{}{}".format( self.nsteps, self.output, self.stack, self._input, self.accumulator, self.dictionary )
-        return "{}{}{}{}{}".format( self.output, self.stack, self._input, self.accumulator, self.dictionary )
+        result = "{}{}{}{}{}".format( self.output, self.stack, self._input, self.accumulator, self.dictionary )
+        print( result )
+        self.render()
+        return result
     
     def translate_word( self, word ):
         return self.words['index_to_word'][str(word)]['word']
@@ -83,25 +88,32 @@ class Pinokio2(gym.Env):
     def translate_list( self, word_list ):
         return [self.words['index_to_word'][str(word)]['word'] for word in word_list ]  
 
+    def decode_action( self, action=None ):
+        if action is None: action = self.last_actions
+        if action is None: return "None"
+        return action_dec[action[0]] + " " + what_dec[action[1]]
+        
+
+    def str_render( self ):
+        
+        result = ""
+
+        if self.last_actions is not None: result += self.decode_action() + "\n"
+
+
+        result += str( ("output = [ " + str(self.translate_list( self.output )) + "]").encode('utf8') ) + "\n"
+        result += str( ("stack = [ " + str(self.translate_list( self.stack )) + "]").encode('utf8') ) + "\n"
+        result += str( ("input = [ " + str(self.translate_list( self._input )) + "]").encode('utf8') ) + "\n"
+        result += str( ("accumulator = " + str(self.translate_list( [self.accumulator] ))).encode('utf8')) + "\n"
+        result += str( ("dictionary = [ " + str(self.translate_list( self.dictionary )) + "]").encode('utf8') ) + "\n"
+        result += str( ("nsteps = [ " + str(self.nsteps) + "]").encode('utf8') ) + "\n"
+        
+        return result
+        
 
     def render( self ):
+        print( self.str_render() )
 
-        action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
-        what_dec = {NOOP: "nothing", OUTPUT:"output",STACK:"stack",DIC:"dic",INPUT:"input"}
-        if self.last_actions is not None: print( action_dec[self.last_actions[0]] + " " + what_dec[self.last_actions[1]] )
-
-
-
-
-
-
-
-        print( ("output = [ " + str(self.translate_list( self.output )) + "]").encode('utf8') )
-        print( ("stack = [ " + str(self.translate_list( self.stack )) + "]").encode('utf8') )
-        print( ("input = [ " + str(self.translate_list( self._input )) + "]").encode('utf8') )
-        print( ("accumulator = " + str(self.translate_list( [self.accumulator] ))).encode('utf8'))
-        print( ("dictionary = [ " + str(self.translate_list( self.dictionary )) + "]").encode('utf8') )
-        print( ("nsteps = [ " + str(self.nsteps) + "]").encode('utf8') )
         
     
 

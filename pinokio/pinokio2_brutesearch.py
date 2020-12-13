@@ -1,12 +1,33 @@
 import math
 import pinokio2
 
+
+def string_steps( state ):
+    result = ""
+    
+    if state.prev is not None: 
+        prev_result, step = string_steps( state.prev )
+        result += prev_result + "\n"
+    else:
+        step = 0
+    
+    step += 1
+    result += "{}: {}".format( step, state.decode_action() )
+    result += state.str_render()
+    return result, step
+
 class BreadthSearchResults:
     best_action = None
     best_value = -math.inf
     best_output = None
     num_steps = math.inf
     loop_count = 0
+    best_output_state = None
+    
+    def __str__( self ):
+        result, _ = string_steps( self.best_output_state )
+        return result
+        
     
 MAX_LOOPAGE = 10000
     
@@ -142,6 +163,7 @@ def breadth_search( root, talk=True ):
     result.num_steps = len( route )
     result.found_it = found_it
     result.loop_count = loop_count
+    result.best_output_state = best_state
         
     return result 
         
