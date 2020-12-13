@@ -12,7 +12,8 @@ def string_steps( state ):
         step = 0
     
     step += 1
-    result += "{}: {}".format( step, state.decode_action() )
+    result += "{}: {}\n".format( step, state.decode_action() )
+    #result += "{}: ".format( step )
     result += state.str_render()
     return result, step
 
@@ -32,6 +33,8 @@ class BreadthSearchResults:
 MAX_LOOPAGE = 10000
     
 def breadth_search( root, talk=True ):
+    root = root.clone()
+
     #construct target_sentances with eos on it.
     eos = root._word_to_index( "<eos>" )
     target_sentances = []
@@ -43,7 +46,7 @@ def breadth_search( root, talk=True ):
         if len( target_sentance ) > max_sentance_length: max_sentance_length = len( target_sentance )
     
     
-    #hahve a hash of the states from the hash string to the state.
+    #have a hash of the states from the hash string to the state.
     search_space = {}
     root.prev = None
     #init the bottom from the root state to search from.

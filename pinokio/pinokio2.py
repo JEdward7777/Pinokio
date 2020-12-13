@@ -5,9 +5,9 @@ import numpy as np
 import parse_in_dictionary
 from gym import spaces
 
-from stable_baselines.common.policies import MlpPolicy
-from stable_baselines.common.vec_env import DummyVecEnv
-from stable_baselines import PPO2
+from stable_baselines3.ppo import MlpPolicy
+from stable_baselines3.common.vec_env import DummyVecEnv
+from stable_baselines3 import PPO
 
 words_file = 'words_edited2.json'
 #sentances_file = "/home/lansford/Sync/projects/tf_over/pinokio/Pinokio/spa-eng/spa.txt"
@@ -459,9 +459,9 @@ def main():
     # env = DummyVecEnv([lambda: env])
 
     if os.path.exists( save_file ):
-        model = PPO2.load( save_file, env=DummyVecEnv([lambda:env]) )
+        model = PPO.load( save_file, env=DummyVecEnv([lambda:env]) )
     else:
-        model = PPO2(MlpPolicy, env, verbose=1)
+        model = PPO(MlpPolicy, env, verbose=1)
 
     while True:
         #model.learn(total_timesteps=10000)

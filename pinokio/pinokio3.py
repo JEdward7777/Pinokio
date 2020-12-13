@@ -1,11 +1,11 @@
 import pinokio2_brutesearch
 import pinokio2
 import os
-from stable_baselines.common.policies import MlpPolicy, MlpLstmPolicy
-from stable_baselines.common.vec_env import DummyVecEnv, SubprocVecEnv
-from stable_baselines import PPO2
+from stable_baselines3.ppo import MlpPolicy #, MlpLstmPolicy
+from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
+from stable_baselines3 import PPO
 
-use_lstm = True
+use_lstm = False
 
 class Pinokio3(pinokio2.Pinokio2):
     last_results = None
@@ -94,14 +94,14 @@ def main():
 
     if os.path.exists( save_file ):
         if use_lstm:
-            model = PPO2.load( save_file, env=SubprocVecEnv([lambda:env]) )
+            model = PPO.load( save_file, env=SubprocVecEnv([lambda:env]) )
         else:
-            model = PPO2.load( save_file, env=DummyVecEnv([lambda:env]) )
+            model = PPO.load( save_file, env=DummyVecEnv([lambda:env]) )
     else:
         if use_lstm:
-            model = PPO2(MlpLstmPolicy, SubprocVecEnv([lambda:env]), verbose=1, nminibatches=1)
+            model = PPO(MlpLstmPolicy, SubprocVecEnv([lambda:env]), verbose=1, nminibatches=1)
         else:
-            model = PPO2(MlpPolicy, DummyVecEnv([lambda:env]), verbose=1)
+            model = PPO(MlpPolicy, DummyVecEnv([lambda:env]), verbose=1)
 
     while True:
         model.learn(total_timesteps=1000)
