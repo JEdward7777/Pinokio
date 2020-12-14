@@ -57,6 +57,8 @@ class Pinokio2(gym.Env):
 
 
     last_actions = None
+
+    action_history = None
     
     def clone( self ):
         result = Pinokio2( skip_load=True )
@@ -73,6 +75,7 @@ class Pinokio2(gym.Env):
         result.dictionary = self.dictionary.copy()
         result.sentance_pairs = self.sentance_pairs
         result.selected_pair = self.selected_pair
+        result.action_history = self.action_history[:]
         return result
     
     def hash_string( self ):
@@ -133,9 +136,11 @@ class Pinokio2(gym.Env):
         #2 current dictionary output
         #3 current input
         #4 accumulator
+        #5-25 ten last actions.
         #self.observation_space = spaces.Box(low=0, high=np.inf, shape=(5,), dtype=np.int32)
         #using ten million as max instead of np.inf because the env checker apparently doesn't know how to handle np.inf.
-        self.observation_space = spaces.Box(low=0, high=10000000, shape=(5,), dtype=np.int32)
+        #self.observation_space = spaces.Box(low=0, high=10000000, shape=(5,), dtype=np.int32)
+        self.observation_space = spaces.Box(low=0, high=10000000, shape=(25,), dtype=np.int32)
         self.reset()
         
     def _construct_observations( self ):
@@ -169,11 +174,16 @@ class Pinokio2(gym.Env):
             obs.append( self.accumulator )
         else:
             obs.append( self._word_to_index( "uh" ) )
+
+        #10 last action history.  Two each make 20.
+        obs += self.action_history
+
         return np.asarray(obs)
 
     def reset( self ):
         self._pick_next_input()
         self.nsteps = 0
+        self.action_history = [0]*20
         return self._construct_observations()
 
     def step(self, action):
@@ -190,6 +200,10 @@ class Pinokio2(gym.Env):
         
             
         if not done:
+            if self.action_history is None: self.action_history = [0]*20
+            self.action_history += action
+            while len( self.action_history ) > 20:
+                self.action_history.pop(0)
             self.last_actions = action
             #action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
             #what_dec = {NOOP: "nothing", OUTPUT:"output",STACK:"stack",DIC:"dic",INPUT:"input"}
