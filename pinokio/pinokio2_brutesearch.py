@@ -138,7 +138,7 @@ def breadth_search( root, talk=True ):
                                     queue.append( hash_string )
                                 search_space[ hash_string ] = pinokio_copy
                     else:
-                        #stop if we found the actuall answer
+                        #stop if we found the actual answer
                         if best_state.output in target_sentances: found_it = True
                         if found_it: break
             if found_it: break

@@ -59,6 +59,8 @@ class Pinokio2(gym.Env):
     last_actions = None
 
     action_history = None
+
+    returned_done = False
     
     def clone( self ):
         result = Pinokio2( skip_load=True )
@@ -110,6 +112,7 @@ class Pinokio2(gym.Env):
         result += str( ("accumulator = " + str(self.translate_list( [self.accumulator] ))).encode('utf8')) + "\n"
         result += str( ("dictionary = [ " + str(self.translate_list( self.dictionary )) + "]").encode('utf8') ) + "\n"
         result += str( ("nsteps = [ " + str(self.nsteps) + "]").encode('utf8') ) + "\n"
+        if self.returned_done: result += "done\n"
         
         return result
         
@@ -184,6 +187,7 @@ class Pinokio2(gym.Env):
         self._pick_next_input()
         self.nsteps = 0
         self.action_history = [0]*20
+        self.returned_done = False
         return self._construct_observations()
 
     def step(self, action):
@@ -201,7 +205,7 @@ class Pinokio2(gym.Env):
             
         if not done:
             if self.action_history is None: self.action_history = [0]*20
-            self.action_history += action
+            self.action_history = self.action_history + list(action)
             while len( self.action_history ) > 20:
                 self.action_history.pop(0)
             self.last_actions = action
@@ -290,6 +294,8 @@ class Pinokio2(gym.Env):
                 reward += self._grade_sentance()
         
         obs = self._construct_observations()
+
+        if done: returned_done = True
         
         return obs, reward, done, {} 
 

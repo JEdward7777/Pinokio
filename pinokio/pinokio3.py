@@ -26,6 +26,10 @@ class Pinokio3(pinokio2.Pinokio2):
             result = self.simple_cache[hash_str]
         return result
 
+    def reset( self ):
+        self.last_results = None
+        return pinokio2.Pinokio2.reset( self )
+
 
     def step(self, action):
         
@@ -56,12 +60,17 @@ class Pinokio3(pinokio2.Pinokio2):
             #we must have gotten lost.
             done = True
         else:
-            if after_results.num_steps < self.last_results.num_steps:
-                reward = 10#1
-            elif after_results.num_steps == self.last_results.num_steps:
-                reward = 2
-            else:
-                reward = 1#-1
+            #just reward it for the traction it gets so that it doesn't
+            #play games of going backwards so that it can be rewarded for
+            #going forward again.
+            reward = after_results.num_steps - self.last_results.num_steps
+
+            # if after_results.num_steps < self.last_results.num_steps:
+            #     reward = 10#1
+            # elif after_results.num_steps == self.last_results.num_steps:
+            #     reward = 2
+            # else:
+            #     reward = 1#-1
         
         # if reward > 2:
         #     print( "=====v" )
@@ -113,6 +122,7 @@ def main():
         for i in range(20):
             action, _states = model.predict(obs)
             obs, reward, done, info = env.step(action)
+            print( "action {} -> reward {}".format( env.decode_action(action), reward ) )
             env.render()
             if done:
                 print( "resetting because " + str(done) )
