@@ -63,7 +63,7 @@ class Pinokio3(pinokio2.Pinokio2):
             #just reward it for the traction it gets so that it doesn't
             #play games of going backwards so that it can be rewarded for
             #going forward again.
-            reward = after_results.num_steps - self.last_results.num_steps
+            reward =  self.last_results.num_steps - after_results.num_steps
 
             # if after_results.num_steps < self.last_results.num_steps:
             #     reward = 10#1
