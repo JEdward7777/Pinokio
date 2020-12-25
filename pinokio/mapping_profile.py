@@ -159,7 +159,8 @@ def find_problems():
                 
                 print( "Stuffing {} into {}.".format( index_to_word(words, o) + ":" + str(o), index_to_word( words, code) + ":" + str(code) ))
 
-                words["index_to_word"][str(code)]["dict"].insert(0,o)
+                #words["index_to_word"][str(code)]["dict"].insert(0,o)
+                words["index_to_word"][str(code)]["dict"].append(o)
 
             print()
             print()
