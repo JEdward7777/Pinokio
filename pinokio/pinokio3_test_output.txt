@@ -1,0 +1,379 @@
+=====
+input	ve
+output	go
+test out	go
+=====
+input	vete
+output	go
+test out	vete
+=====
+input	vaya
+output	go
+test out	go
+=====
+input	váyase
+output	go
+test out	go
+=====
+input	hola
+output	hi
+output	hello
+test out	hi
+=====
+input	corre
+output	run
+test out	corre
+=====
+input	corred
+output	run
+test out	run
+=====
+input	quién
+output	who
+test out	quién
+=====
+input	fuego
+output	fire
+test out	fire
+=====
+input	incendio
+output	fire
+test out	fire
+=====
+input	disparad
+output	fire
+test out	fire
+=====
+input	ayuda
+output	help
+test out	ayuda
+=====
+input	socorro auxilio
+output	help
+test out	socorro
+=====
+input	auxilio
+output	help
+test out	auxilio
+=====
+input	salta
+output	jump
+test out	jump
+=====
+input	salte
+output	jump
+output	get out
+test out	jump
+=====
+input	parad
+output	stop
+test out	stop
+=====
+input	para
+output	stop
+test out	stop
+=====
+input	pare
+output	stop
+test out	stop
+=====
+input	espera
+output	wait
+test out	wait
+=====
+input	esperen
+output	wait
+test out	wait
+=====
+input	continúa
+output	go on
+test out	go
+=====
+input	continúe
+output	go on
+test out	go
+=====
+input	corrí
+output	i ran
+test out	i
+=====
+input	corría
+output	i ran
+test out	i
+=====
+input	lo intento
+output	i try
+test out	i
+=====
+input	he ganado
+output	i won
+test out	i
+=====
+input	oh no
+output	oh no
+test out	oh
+=====
+input	tomátelo con soda
+output	drink it with soda
+test out	tomátelo
+=====
+input	sonríe
+output	smile
+test out	sonríe
+=====
+input	al ataque
+output	attack
+test out	al
+=====
+input	atacad
+output	attack
+test out	attack
+=====
+input	levanta
+output	get up
+test out	get
+=====
+input	ve ahora mismo
+output	go now
+test out	now
+=====
+input	lo tengo
+output	got it
+test out	we
+=====
+input	lo pillas
+output	got it
+test out	we
+=====
+input	entendiste
+output	got it
+test out	
+=====
+input	él corrió
+output	he ran
+test out	he
+=====
+input	métete adentro
+output	hop in
+test out	hop
+=====
+input	abrázame
+output	hug me
+test out	abrázame
+=====
+input	me caí
+output	i fell
+test out	i
+=====
+input	yo lo sé
+output	i know
+test out	me
+=====
+input	salí
+output	i left
+output	get out
+test out	i
+=====
+input	mentí
+output	i lied
+test out	i
+=====
+input	perdí
+output	i lost
+test out	i
+=====
+input	dimito
+output	i quit
+test out	dimito
+=====
+input	renuncié
+output	i quit
+test out	i
+=====
+input	estoy trabajando
+output	i work
+test out	i'm
+=====
+input	tengo diecinueve
+output	i'm 19
+test out	i'm
+=====
+input	estoy levantado
+output	i'm up
+test out	i
+=====
+input	escucha
+output	listen
+test out	listen
+=====
+input	escuche
+output	listen
+test out	listen
+=====
+input	escuchen
+output	listen
+test out	listen
+=====
+input	no puede ser
+output	can not be
+test out	not
+=====
+input	de ninguna manera
+output	no way
+output	no way
+test out	of
+=====
+input	imposible
+output	no way
+test out	no
+=====
+input	de ningún modo
+output	no way
+test out	of
+=====
+input	de eso nada
+output	nothing about that
+test out	of
+=====
+input	ni cagando
+output	no way
+test out	not
+=====
+input	mangos
+output	no way
+test out	not
+=====
+input	minga
+output	no way
+test out	not
+=====
+input	ni en pedo
+output	not even fart
+test out	not
+=====
+input	en serio
+output	really
+test out	even
+=====
+input	la verdad
+output	the truth
+test out	the
+=====
+input	gracias
+output	thanks
+output	thanks
+test out	thanks
+=====
+input	pruébalo
+output	try it
+test out	
+=====
+input	lo procuramos
+output	we try
+test out	i
+=====
+input	ganamos
+output	we won
+test out	we
+=====
+input	por qué yo
+output	why me
+test out	por
+=====
+input	pregúntale a tom
+output	ask tom
+test out	ask
+=====
+input	órale
+output	awesome
+output	come on
+output	come on
+test out	órale
+=====
+input	mantente en calma
+output	be calm
+test out	be
+=====
+input	estate tranquilo
+output	be cool
+test out	estate
+=====
+input	sé justo
+output	be fair
+test out	be
+=====
+input	sean gentiles
+output	be kind
+test out	be
+=====
+input	sé agradable
+output	be nice
+test out	know
+=====
+input	pírate
+output	beat it
+test out	beat
+=====
+input	llamame
+output	call me
+test out	call
+=====
+input	llamadme
+output	call me
+test out	call
+=====
+input	llámame
+output	call me
+test out	llámame
+=====
+input	llámanos
+output	call us
+test out	call
+=====
+input	entre
+output	come in
+test out	come
+=====
+input	pase
+output	come in
+test out	come
+=====
+input	entren
+output	come in
+test out	come
+=====
+input	ándale
+output	come on
+test out	come
+=====
+input	suéltalo
+output	drop it
+test out	drop
+=====
+input	agarra a tom
+output	get tom
+test out	get
+=====
+input	bájate
+output	get out
+test out	get
+=====
+input	sal
+output	get out
+test out	get
+=====
+input	salid
+output	get out
+test out	get
+=====
+input	salgan
+output	get out
+test out	get
+=====
+input	vete de aquí
+output	go away
+test out	of
+=====
+input	lárgate
+output	go away
+test out	go

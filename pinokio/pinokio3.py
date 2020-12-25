@@ -26,9 +26,9 @@ class Pinokio3(pinokio2.Pinokio2):
             result = self.simple_cache[hash_str]
         return result
 
-    def reset( self ):
+    def reset( self, selected_pair=None ):
         self.last_results = None
-        return pinokio2.Pinokio2.reset( self )
+        return pinokio2.Pinokio2.reset( self, selected_pair )
 
 
     def step(self, action):

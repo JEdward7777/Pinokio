@@ -19,6 +19,8 @@ class SentancePair:
     def __init__( self ):
         self._input = []
         self.outputs = []
+    def __str__( self ):
+        return "{} -> {}".format( self._input, self.outputs )
     
 NOOP = 0
 PUSH_TO = 1
@@ -183,11 +185,12 @@ class Pinokio2(gym.Env):
 
         return np.asarray(obs)
 
-    def reset( self ):
-        self._pick_next_input()
+    def reset( self, selected_pair=None ):
+        self._pick_next_input(selected_pair)
         self.nsteps = 0
         self.action_history = [0]*20
         self.returned_done = False
+        self.last_actions = None
         return self._construct_observations()
 
     def step(self, action):
@@ -279,7 +282,7 @@ class Pinokio2(gym.Env):
                 elif action[0] == PULL_FROM:
                     if self._input:
                         #pull from input. No reward if the input is empty. One point if consumed words is less than output length.
-                        if self.starting_sentance_length - len(self._input) < len(self.output):
+                        if self.starting_sentance_length - len(self._input) <= len(self.output):
                             reward += 1
                         self.accumulator = self._input.pop(0)
                     else:
@@ -348,8 +351,12 @@ class Pinokio2(gym.Env):
                     
         
     
-    def _pick_next_input(self):
-        self.selected_pair = random.choice( self.sentance_pairs )
+    def _pick_next_input(self,selected_pair=None):
+        if selected_pair is not None:
+            self.selected_pair = selected_pair
+        else:
+            self.selected_pair = random.choice( self.sentance_pairs )
+
         self._input = self.selected_pair._input[:]
         self.original_input = self.selected_pair._input[:]
         self.starting_sentance_length = len(self._input)
