@@ -5,7 +5,7 @@ test out	go
 =====
 input	vete
 output	go
-test out	vete
+test out	out
 =====
 input	vaya
 output	go
@@ -13,7 +13,8 @@ test out	go
 =====
 input	váyase
 output	go
-test out	go
+output	go away
+test out	away
 =====
 input	hola
 output	hi
@@ -22,15 +23,15 @@ test out	hi
 =====
 input	corre
 output	run
-test out	corre
+test out	run
 =====
 input	corred
 output	run
-test out	run
+test out	corred
 =====
 input	quién
 output	who
-test out	quién
+test out	who
 =====
 input	fuego
 output	fire
@@ -46,15 +47,15 @@ test out	fire
 =====
 input	ayuda
 output	help
-test out	ayuda
+test out	help
 =====
 input	socorro auxilio
 output	help
-test out	socorro
+test out	help
 =====
 input	auxilio
 output	help
-test out	auxilio
+test out	help
 =====
 input	salta
 output	jump
@@ -79,7 +80,9 @@ test out	stop
 =====
 input	espera
 output	wait
-test out	wait
+output	hang on
+output	hold it
+test out	it
 =====
 input	esperen
 output	wait
@@ -103,7 +106,7 @@ test out	i
 =====
 input	lo intento
 output	i try
-test out	i
+test out	we
 =====
 input	he ganado
 output	i won
@@ -115,11 +118,11 @@ test out	oh
 =====
 input	tomátelo con soda
 output	drink it with soda
-test out	tomátelo
+test out	it
 =====
 input	sonríe
 output	smile
-test out	sonríe
+test out	smile
 =====
 input	al ataque
 output	attack
@@ -139,7 +142,7 @@ test out	now
 =====
 input	lo tengo
 output	got it
-test out	we
+test out	
 =====
 input	lo pillas
 output	got it
@@ -151,7 +154,7 @@ test out
 =====
 input	él corrió
 output	he ran
-test out	he
+test out	i
 =====
 input	métete adentro
 output	hop in
@@ -159,7 +162,7 @@ test out	hop
 =====
 input	abrázame
 output	hug me
-test out	abrázame
+test out	hug
 =====
 input	me caí
 output	i fell
@@ -167,7 +170,7 @@ test out	i
 =====
 input	yo lo sé
 output	i know
-test out	me
+test out	i
 =====
 input	salí
 output	i left
@@ -180,7 +183,7 @@ test out	i
 =====
 input	perdí
 output	i lost
-test out	i
+test out	
 =====
 input	dimito
 output	i quit
@@ -192,7 +195,7 @@ test out	i
 =====
 input	estoy trabajando
 output	i work
-test out	i'm
+test out	
 =====
 input	tengo diecinueve
 output	i'm 19
@@ -200,7 +203,7 @@ test out	i'm
 =====
 input	estoy levantado
 output	i'm up
-test out	i
+test out	i'm
 =====
 input	escucha
 output	listen
@@ -225,7 +228,7 @@ test out	of
 =====
 input	imposible
 output	no way
-test out	no
+test out	not
 =====
 input	de ningún modo
 output	no way
@@ -257,7 +260,7 @@ test out	even
 =====
 input	la verdad
 output	the truth
-test out	the
+test out	
 =====
 input	gracias
 output	thanks
@@ -266,11 +269,11 @@ test out	thanks
 =====
 input	pruébalo
 output	try it
-test out	
+test out	try
 =====
 input	lo procuramos
 output	we try
-test out	i
+test out	we
 =====
 input	ganamos
 output	we won
@@ -282,13 +285,15 @@ test out	por
 =====
 input	pregúntale a tom
 output	ask tom
-test out	ask
+test out	pregúntale
 =====
 input	órale
 output	awesome
 output	come on
 output	come on
-test out	órale
+output	go away
+output	go away
+test out	away
 =====
 input	mantente en calma
 output	be calm
@@ -296,7 +301,7 @@ test out	be
 =====
 input	estate tranquilo
 output	be cool
-test out	estate
+test out	be
 =====
 input	sé justo
 output	be fair
@@ -308,7 +313,7 @@ test out	be
 =====
 input	sé agradable
 output	be nice
-test out	know
+test out	be
 =====
 input	pírate
 output	beat it
@@ -324,7 +329,7 @@ test out	call
 =====
 input	llámame
 output	call me
-test out	llámame
+test out	call
 =====
 input	llámanos
 output	call us
@@ -340,7 +345,7 @@ test out	come
 =====
 input	entren
 output	come in
-test out	come
+test out	entren
 =====
 input	ándale
 output	come on
@@ -348,7 +353,7 @@ test out	come
 =====
 input	suéltalo
 output	drop it
-test out	drop
+test out	
 =====
 input	agarra a tom
 output	get tom
@@ -368,12 +373,174 @@ test out	get
 =====
 input	salgan
 output	get out
-test out	get
+test out	
 =====
 input	vete de aquí
 output	go away
-test out	of
+output	get out of here
+test out	away
 =====
 input	lárgate
 output	go away
+output	get out
+test out	
+=====
+input	salga de aquí
+output	get out of here
+test out	here
+=====
+input	largo
+output	go away
+output	long
+test out	long
+=====
+input	vete ya
+output	go away
+output	go away
+test out	away
+=====
+input	a la calle
+output	on the street
+test out	on
+=====
+input	lárguese
+output	get out
+test out	out
+=====
+input	vete a casa
+output	go home
+test out	vete
+=====
+input	vaya despacio
+output	go slow
+test out	vaya
+=====
+input	hasta luego
+output	goodbye
+test out	goodbye
+=====
+input	hasta la vista
+output	goodbye
+test out	goodbye
+=====
+input	chau
+output	goodbye
+test out	goodbye
+=====
+input	espera un momento
+output	hang on
+test out	wait
+=====
+input	un segundo
+output	one second
+test out	one
+=====
+input	agarra fuertemente
+output	hold tight
+output	hold on
+test out	hold
+=====
+input	él vino
+output	he came
+test out	i
+=====
+input	él renunció
+output	he quit
+test out	i
+=====
+input	ayúdame
+output	help me
+output	help me
+test out	ayúdame
+=====
+input	échame una mano
+output	give me a hand
+test out	i
+=====
+input	ayudame
+output	help me
+test out	i
+=====
+input	ayúdanos
+output	help us
+test out	us
+=====
+input	golpea a tom
+output	hit tom
+test out	hit
+=====
+input	resista
+output	hold on
+test out	on
+=====
+input	resiste
+output	hold on
+test out	on
+=====
+input	abraza a tom
+output	hug tom
+test out	hug
+=====
+input	estoy de acuerdo
+output	i agree
+test out	estoy
+=====
+input	de acuerdo
+output	agree
+test out	de
+=====
+input	me incliné
+output	i bowed
+test out	i
+=====
+input	me he mudado
+output	i moved
+test out	i
+=====
+input	me mudé
+output	i moved
+test out	i
+=====
+input	me trasladé
+output	i moved
+test out	i
+=====
+input	me he trasladado
+output	i moved
+test out	i
+=====
+input	dormí
+output	i slept
+test out	slept
+=====
+input	lo intenté
+output	i tried
+test out	we
+=====
+input	iré
+output	i'll go
 test out	go
+=====
+input	soy tom
+output	i'm tom
+test out	i'm
+=====
+input	estoy gordo
+output	i'm fat
+test out	i'm
+=====
+input	soy gorda
+output	i'm fat
+test out	i'm
+=====
+input	estoy en forma
+output	i'm fit
+test out	i'm
+=====
+input	estoy afectado
+output	i'm affected
+test out	i'm
+=====
+input	soy viejo
+output	i'm old
+test out	i'm
