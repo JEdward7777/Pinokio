@@ -31,7 +31,7 @@ DIC = 3
 INPUT = 4
 
 
-NUM_PAIRS = 200
+NUM_PAIRS = 300
 
 
 action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
