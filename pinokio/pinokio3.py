@@ -4,8 +4,8 @@ import os
 from stable_baselines3.ppo import MlpPolicy #, MlpLstmPolicy
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
 from stable_baselines3 import PPO
-
-use_lstm = False
+from stable_baselines3.common.callbacks import CheckpointCallback
+import torch as th
 
 class Pinokio3(pinokio2.Pinokio2):
     last_results = None
@@ -89,12 +89,22 @@ class Pinokio3(pinokio2.Pinokio2):
         self.last_results = after_results
         return obs, reward, done, info
         
-if use_lstm:
-    save_file = "pinokio3lstm_1.save"
+
+
+
+larger_net = True
+if larger_net:
+    save_file = "pinokio3_larger.save"
+    net_arch = [20, dict(pi=[64, 256, 64], vf=[64, 64])]
+    tb_log_name = "larger_1"
 else:
+    net_arch = [dict(pi=[64, 64], vf=[64, 64])]
+    tb_log_name = "normal"
     save_file = "pinokio3.save"
     
 def main():
+
+    tensorboard_log = "./log"
 
     env = Pinokio3()
     # Optional: PPO2 requires a vectorized environment to run
@@ -102,18 +112,18 @@ def main():
     # env = DummyVecEnv([lambda: env])
 
     if os.path.exists( save_file ):
-        if use_lstm:
-            model = PPO.load( save_file, env=SubprocVecEnv([lambda:env]) )
-        else:
-            model = PPO.load( save_file, env=DummyVecEnv([lambda:env]) )
+        model = PPO.load( save_file, env=DummyVecEnv([lambda:env]),tensorboard_log=tensorboard_log )
     else:
-        if use_lstm:
-            model = PPO(MlpLstmPolicy, SubprocVecEnv([lambda:env]), verbose=1, nminibatches=1)
-        else:
-            model = PPO(MlpPolicy, DummyVecEnv([lambda:env]), verbose=1)
+        policy_kwargs = dict(activation_fn=th.nn.ReLU, net_arch=net_arch)
+        model = PPO(MlpPolicy, DummyVecEnv([lambda:env]), verbose=1,tensorboard_log=tensorboard_log)
+
+    #https://stable-baselines3.readthedocs.io/en/master/guide/callbacks.html
+    checkpoint_callback = CheckpointCallback(save_freq=10000, save_path='./checkpoints/',
+                                         name_prefix='pinokio3')
+
 
     while True:
-        model.learn(total_timesteps=1000)
+        model.learn(total_timesteps=3000000, callback=checkpoint_callback, tb_log_name=tb_log_name )
 
         model.save( save_file )
         print( "saved" )

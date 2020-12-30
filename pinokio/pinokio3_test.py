@@ -8,25 +8,14 @@ import numpy as np
 
 def main():
     
-    if pinokio3.use_lstm:
-        env = pinokio3.Pinokio3()
-        #env_vec = DummyVecEnv([lambda:env,lambda:env.clone(),lambda:env.clone(),lambda:env.clone()])
-        env_vec = DummyVecEnv([lambda:env])
-        model = PPO.load( pinokio3.save_file, env=env_vec, nminibatches=1 )
-    else:
-        env = pinokio3.Pinokio3()
-        model = PPO.load( pinokio3.save_file, env=DummyVecEnv([lambda:env]) )
+    env = pinokio3.Pinokio3()
+    model = PPO.load( pinokio3.save_file, env=DummyVecEnv([lambda:env]) )
         
     obs = env.reset()
     for i in range(200):
         print( "obs are {}".format( obs ) )
         
-        if pinokio3.use_lstm:
-            #action, _states = model.predict(np.stack((obs,obs,obs,obs)))
-            action, _states = model.predict(obs)
-            action = action[0]
-        else:
-            action, _states = model.predict(obs)
+        action, _states = model.predict(obs)
         
         print( "action is a {}".format(action) )
         
@@ -41,7 +30,6 @@ def main():
 
 
 def translate_all_pairs():
-    if pinokio3.use_lstm: raise Exception( "lstm not supported" )
 
     #env = pinokio3.Pinokio3()
     env = pinokio2.Pinokio2()
