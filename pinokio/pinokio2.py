@@ -34,6 +34,12 @@ INPUT = 4
 NUM_PAIRS = 300
 
 
+OUTPUT_CONTEXT = 100
+INPUT_CONTEXT = 100
+STACK_CONTEXT = 100
+DICT_CONTEXT = 20
+
+
 action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
 what_dec = {NOOP: "nothing", OUTPUT:"output",STACK:"stack",DIC:"dic",INPUT:"input"}
 
@@ -145,34 +151,20 @@ class Pinokio2(gym.Env):
         #self.observation_space = spaces.Box(low=0, high=np.inf, shape=(5,), dtype=np.int32)
         #using ten million as max instead of np.inf because the env checker apparently doesn't know how to handle np.inf.
         #self.observation_space = spaces.Box(low=0, high=10000000, shape=(5,), dtype=np.int32)
-        self.observation_space = spaces.Box(low=0, high=10000000, shape=(25,), dtype=np.int32)
-        self.reset()
+        #self.observation_space = spaces.Box(low=0, high=10000000, shape=(25,), dtype=np.int32)
+        obs = self.reset()
+        self.observation_space = spaces.Box(low=0, high=10000000, shape=(len(obs),), dtype=np.int32)
+        
         
     def _construct_observations( self ):
         obs = []
-        #0 last output
-        if self.output:
-            obs.append( self.output[-1] )
-        else:
-            obs.append( self._word_to_index( "uh" ) )
+
             
-        #1 top of stack
-        if self.stack:
-            obs.append( self.stack[-1] )
-        else:
-            obs.append( self._word_to_index( "uh" ) )
+        #stack
+        obs +=  ([self._word_to_index( "uh" )]*STACK_CONTEXT + self.stack)[-STACK_CONTEXT:]
             
-        #2 current dictionary output
-        if self.dictionary:
-            obs.append( self.dictionary[0] )
-        else:
-            obs.append( self._word_to_index( "uh" ) )
-            
-        #3 current input
-        if self._input:
-            obs.append( self._input[0] )
-        else:
-            obs.append( self._word_to_index( "<eos>" ) )
+        #current dictionary contents
+        obs +=  (self.dictionary + [self._word_to_index( "uh" )]*DICT_CONTEXT)[:DICT_CONTEXT]
             
         #4 accumulator
         if self.accumulator:
@@ -182,6 +174,12 @@ class Pinokio2(gym.Env):
 
         #10 last action history.  Two each make 20.
         obs += self.action_history
+
+        #outputs obs
+        obs +=  ([self._word_to_index( "<eos>" )]*OUTPUT_CONTEXT + self.output)[-OUTPUT_CONTEXT:]
+
+        #input obs
+        obs +=  (self._input + [self._word_to_index( "<eos>" )]*INPUT_CONTEXT)[:INPUT_CONTEXT]
 
         return np.asarray(obs)
 

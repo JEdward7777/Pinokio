@@ -92,15 +92,18 @@ class Pinokio3(pinokio2.Pinokio2):
 
 
 
-larger_net = True
-if larger_net:
-    save_file = "pinokio3_larger.save"
-    net_arch = [20, dict(pi=[64, 256, 64], vf=[64, 64])]
-    tb_log_name = "larger_1"
-else:
-    net_arch = [dict(pi=[64, 64], vf=[64, 64])]
-    tb_log_name = "normal"
-    save_file = "pinokio3.save"
+# save_file = "pinokio3_larger.save"
+# net_arch = [20, dict(pi=[64, 256, 64], vf=[64, 64])]
+# tb_log_name = "larger_1"
+
+# net_arch = [dict(pi=[64, 64], vf=[64, 64])]
+# tb_log_name = "normal"
+# save_file = "pinokio3.save"
+
+#now changing net_arch as well as providing sentance context to obs.
+save_file = "pinokio3_with_context.save"
+net_arch = [100, dict(pi=[64, 256, 64], vf=[64, 64])]
+tb_log_name = "context_1"
     
 def main():
 

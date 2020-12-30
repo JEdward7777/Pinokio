@@ -5,7 +5,7 @@ test out
 =====
 input	vete
 output	go
-test out	
+test out	uh
 =====
 input	vaya
 output	go
@@ -40,7 +40,7 @@ test out
 =====
 input	incendio
 output	fire
-test out	
+test out	uh
 =====
 input	disparad
 output	fire
@@ -52,7 +52,7 @@ test out
 =====
 input	socorro auxilio
 output	help
-test out	
+test out	socorro
 =====
 input	auxilio
 output	help
@@ -108,7 +108,7 @@ test out
 =====
 input	lo intento
 output	i try
-test out	
+test out	lo
 =====
 input	he ganado
 output	i won
@@ -120,7 +120,7 @@ test out
 =====
 input	tomátelo con soda
 output	drink it with soda
-test out	
+test out	con
 =====
 input	sonríe
 output	smile
@@ -128,24 +128,24 @@ test out
 =====
 input	al ataque
 output	attack
-test out	
+test out	al
 =====
 input	atacad
 output	attack
-test out	
+test out	uh
 =====
 input	levanta
 output	get up
-test out	
+test out	uh
 =====
 input	ve ahora mismo
 output	go now
-test out	
+test out	ahora
 =====
 input	lo tengo
 output	got it
 output	i got it
-test out	
+test out	lo lo
 =====
 input	lo pillas
 output	got it
@@ -199,7 +199,7 @@ test out
 =====
 input	estoy trabajando
 output	i work
-test out	
+test out	estoy
 =====
 input	tengo diecinueve
 output	i'm 19
@@ -207,7 +207,7 @@ test out
 =====
 input	estoy levantado
 output	i'm up
-test out	
+test out	i'm i'm i'm
 =====
 input	escucha
 output	listen
@@ -219,7 +219,7 @@ test out
 =====
 input	escuchen
 output	listen
-test out	
+test out	uh
 =====
 input	no puede ser
 output	can not be
@@ -228,15 +228,15 @@ test out
 input	de ninguna manera
 output	no way
 output	no way
-test out	
+test out	not
 =====
 input	imposible
 output	no way
-test out	
+test out	uh
 =====
 input	de ningún modo
 output	no way
-test out	
+test out	uh
 =====
 input	de eso nada
 output	nothing about that
@@ -252,15 +252,15 @@ test out
 =====
 input	minga
 output	no way
-test out	
+test out	uh
 =====
 input	ni en pedo
 output	not even fart
-test out	
+test out	en
 =====
 input	en serio
 output	really
-test out	
+test out	even
 =====
 input	la verdad
 output	the truth
@@ -277,7 +277,7 @@ test out
 =====
 input	lo procuramos
 output	we try
-test out	
+test out	lo
 =====
 input	ganamos
 output	we won
@@ -289,7 +289,7 @@ test out
 =====
 input	pregúntale a tom
 output	ask tom
-test out	
+test out	uh
 =====
 input	órale
 output	awesome
@@ -297,11 +297,11 @@ output	come on
 output	come on
 output	go away
 output	go away
-test out	
+test out	uh
 =====
 input	mantente en calma
 output	be calm
-test out	
+test out	en
 =====
 input	estate tranquilo
 output	be cool
@@ -313,19 +313,19 @@ test out
 =====
 input	sean gentiles
 output	be kind
-test out	
+test out	gentiles
 =====
 input	sé agradable
 output	be nice
-test out	<eos>
+test out	sé
 =====
 input	pírate
 output	beat it
-test out	
+test out	uh
 =====
 input	llamame
 output	call me
-test out	
+test out	uh
 =====
 input	llamadme
 output	call me
@@ -355,11 +355,11 @@ test out
 =====
 input	ándale
 output	come on
-test out	
+test out	uh
 =====
 input	suéltalo
 output	drop it
-test out	
+test out	uh
 =====
 input	agarra a tom
 output	get tom
@@ -375,7 +375,7 @@ test out
 =====
 input	salid
 output	get out
-test out	
+test out	uh
 =====
 input	salgan
 output	get out
@@ -385,7 +385,7 @@ input	vete de aquí
 output	go away
 output	get out of here
 output	get out of here
-test out	
+test out	vete
 =====
 input	lárgate
 output	go away
@@ -425,7 +425,7 @@ test out
 =====
 input	vaya despacio
 output	go slow
-test out	
+test out	go
 =====
 input	hasta luego
 output	goodbye
@@ -447,7 +447,7 @@ test out
 =====
 input	un segundo
 output	one second
-test out	
+test out	un
 =====
 input	agarra fuertemente
 output	hold tight
@@ -460,7 +460,7 @@ test out
 =====
 input	él renunció
 output	he quit
-test out	
+test out	él
 =====
 input	ayúdame
 output	help me
@@ -481,7 +481,7 @@ test out
 =====
 input	golpea a tom
 output	hit tom
-test out	
+test out	a
 =====
 input	resista
 output	hold on
@@ -493,7 +493,7 @@ test out
 =====
 input	abraza a tom
 output	hug tom
-test out	
+test out	a
 =====
 input	estoy de acuerdo
 output	i agree
@@ -517,11 +517,11 @@ test out
 =====
 input	me trasladé
 output	i moved
-test out	
+test out	me trasladé
 =====
 input	me he trasladado
 output	i moved
-test out	
+test out	he he
 =====
 input	dormí
 output	i slept
@@ -529,11 +529,11 @@ test out
 =====
 input	lo intenté
 output	i tried
-test out	
+test out	lo
 =====
 input	iré
 output	i'll go
-test out	
+test out	uh
 =====
 input	soy tom
 output	i'm tom
@@ -559,7 +559,7 @@ test out
 =====
 input	soy viejo
 output	i'm old
-test out	
+test out	uh uh
 =====
 input	soy tímido
 output	i'm shy
@@ -576,7 +576,7 @@ test out
 input	soy yo
 output	it's me
 output	it's me
-test out	
+test out	soy
 =====
 input	únete a nosotros
 output	join us
@@ -584,11 +584,11 @@ test out
 =====
 input	sé parte nuestra
 output	be part of us
-test out	
+test out	parte
 =====
 input	guárdalo
 output	keep it
-test out	
+test out	uh
 =====
 input	yo también
 output	me too
@@ -604,7 +604,7 @@ test out
 =====
 input	nos vemos
 output	see you
-test out	
+test out	nos vemos
 =====
 input	muéstramelo
 output	show me
@@ -616,15 +616,15 @@ test out
 =====
 input	mostrame
 output	show me
-test out	
+test out	uh
 =====
 input	cierra la boca
 output	close your mouth
-test out	
+test out	la
 =====
 input	sáltatelo
 output	skip it
-test out	
+test out	uh
 =====
 input	páralo
 output	stop it
@@ -644,7 +644,7 @@ test out
 =====
 input	tom comió
 output	tom ate
-test out	
+test out	tom
 =====
 input	tom corrió
 output	tom ran
@@ -690,7 +690,7 @@ test out
 =====
 input	bienvenidos
 output	welcome
-test out	
+test out	uh
 =====
 input	bienvenidas
 output	welcome
@@ -702,7 +702,7 @@ test out
 =====
 input	quién corría
 output	who ran
-test out	
+test out	quién
 =====
 input	quién corrió
 output	who ran
@@ -714,11 +714,11 @@ test out
 =====
 input	quién ha ganado
 output	who won
-test out	
+test out	ganado
 =====
 input	por qué no
 output	why not
-test out	
+test out	over
 =====
 input	has ganado
 output	you won
@@ -738,11 +738,11 @@ test out
 =====
 input	apártate
 output	back off
-test out	
+test out	uh
 =====
 input	sé un hombre
 output	be a man
-test out	
+test out	un un one
 =====
 input	sé fuerte
 output	be brave
@@ -762,7 +762,7 @@ test out
 =====
 input	estate quieto
 output	be quiet
-test out	
+test out	estate
 =====
 input	no te muevas
 output	do not move
@@ -778,7 +778,7 @@ test out
 =====
 input	llámenlo a tomás
 output	call tom
-test out	
+test out	a
 =====
 input	anímate
 output	cheer up
@@ -802,19 +802,19 @@ test out
 =====
 input	encontralo a tomás
 output	find tom
-test out	
+test out	a
 =====
 input	encuéntralo a tomás
 output	find tom
-test out	
+test out	uh uh
 =====
 input	encuéntrelo a tomás
 output	find tom
-test out	
+test out	a
 =====
 input	encuéntrenlo a tomás
 output	find tom
-test out	
+test out	a tomás
 =====
 input	encuentre a tom
 output	find tom
@@ -826,11 +826,11 @@ test out
 =====
 input	arregla esto
 output	fix this
-test out	
+test out	arregla
 =====
 input	ponte a ello
 output	get to it
-test out	
+test out	a
 =====
 input	abajo
 output	get down
@@ -838,7 +838,7 @@ test out
 =====
 input	túmbate
 output	get down
-test out	<eos>
+test out	
 =====
 input	piérdete
 output	get lost
@@ -854,7 +854,7 @@ test out
 =====
 input	abre los ojos
 output	open your eyes
-test out	
+test out	los ojos
 =====
 input	adelante
 output	go ahead
@@ -875,7 +875,7 @@ test out
 =====
 input	buen trabajo
 output	good job
-test out	
+test out	buen
 =====
 input	sujeta a tom
 output	grab tom
@@ -891,11 +891,11 @@ test out
 =====
 input	pásala bien
 output	have fun
-test out	
+test out	have
 =====
 input	pásenla bien
 output	have fun
-test out	
+test out	pásenla pásenla
 =====
 input	él habló
 output	he spoke
@@ -911,7 +911,7 @@ test out
 =====
 input	ayuda a tom
 output	help tom
-test out	
+test out	on
 =====
 input	ayúdalo
 output	help him
@@ -935,7 +935,7 @@ test out
 =====
 input	qué tal os va
 output	how are you doing
-test out	
+test out	os
 =====
 input	hola por aquí
 output	hello over here
@@ -951,7 +951,7 @@ test out
 =====
 input	cómo de profundo
 output	how deep
-test out	
+test out	de
 =====
 input	hazme el favor
 output	do me the favor
@@ -975,7 +975,7 @@ test out
 =====
 input	acepté
 output	i agreed
-test out	
+test out	uh uh
 =====
 input	accedí
 output	i agreed
@@ -983,7 +983,7 @@ test out
 =====
 input	estoy viejo
 output	i am old
-test out	
+test out	estoy
 =====
 input	me lo comí
 output	i ate it
@@ -991,7 +991,7 @@ test out
 =====
 input	me la comí
 output	i ate it
-test out	uh
+test out	
 =====
 input	puedo ir
 output	i can go
@@ -999,11 +999,11 @@ test out
 =====
 input	lo hice bien
 output	i did ok
-test out	
+test out	hice
 =====
 input	lo hice
 output	i did it
-test out	
+test out	lo
 =====
 input	fracasé
 output	i failed
@@ -1011,7 +1011,7 @@ test out
 =====
 input	lo olvidé
 output	i forgot
-test out	uh
+test out	lo
 =====
 input	me las arreglo
 output	i get by
@@ -1047,7 +1047,7 @@ test out
 =====
 input	hablé
 output	i talked
-test out	
+test out	uh
 =====
 input	hablaba
 output	i talked
@@ -1055,11 +1055,11 @@ test out
 =====
 input	charlé
 output	i talked
-test out	
+test out	uh uh
 =====
 input	charlaba
 output	i talked
-test out	
+test out	charlaba
 =====
 input	yo lo uso
 output	i use it
