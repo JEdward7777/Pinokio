@@ -71,6 +71,9 @@ class Pinokio3(pinokio2.Pinokio2):
             #     reward = 2
             # else:
             #     reward = 1#-1
+
+        #a little negativity to encorage not waisting time.
+        reward -= .01
         
         # if reward > 2:
         #     print( "=====v" )
@@ -126,7 +129,7 @@ def main():
 
 
     while True:
-        model.learn(total_timesteps=3000000, callback=checkpoint_callback, tb_log_name=tb_log_name )
+        model.learn(total_timesteps=15000000, callback=checkpoint_callback, tb_log_name=tb_log_name )
 
         model.save( save_file )
         print( "saved" )
