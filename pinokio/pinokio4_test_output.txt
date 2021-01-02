@@ -1,0 +1,1086 @@
+=====
+input	ve
+output	go
+test out	uh uh <eos>
+=====
+input	vete
+output	go
+test out	<eos>
+=====
+input	vaya
+output	go
+test out	vaya
+=====
+input	váyase
+output	go
+output	go away
+test out	<eos>
+=====
+input	hola
+output	hi
+output	hello
+test out	<eos>
+=====
+input	corre
+output	run
+output	you run
+test out	<eos>
+=====
+input	corred
+output	run
+test out	<eos>
+=====
+input	quién
+output	who
+test out	<eos>
+=====
+input	fuego
+output	fire
+test out	<eos>
+=====
+input	incendio
+output	fire
+test out	<eos>
+=====
+input	disparad
+output	fire
+test out	<eos>
+=====
+input	ayuda
+output	help
+test out	<eos>
+=====
+input	socorro auxilio
+output	help
+test out	auxilio <eos>
+=====
+input	auxilio
+output	help
+test out	auxilio auxilio auxilio
+=====
+input	salta
+output	jump
+test out	salta salta salta <eos>
+=====
+input	salte
+output	jump
+output	get out
+test out	
+=====
+input	parad
+output	stop
+test out	<eos>
+=====
+input	para
+output	stop
+test out	para <eos>
+=====
+input	pare
+output	stop
+test out	uh uh
+=====
+input	espera
+output	wait
+output	hang on
+output	hold it
+test out	<eos>
+=====
+input	esperen
+output	wait
+test out	esperen esperen <eos>
+=====
+input	continúa
+output	go on
+output	drive on
+test out	<eos>
+=====
+input	continúe
+output	go on
+test out	uh uh continúe continúe
+=====
+input	corrí
+output	i ran
+test out	uh
+=====
+input	corría
+output	i ran
+test out	
+=====
+input	lo intento
+output	i try
+test out	uh <eos>
+=====
+input	he ganado
+output	i won
+test out	uh <eos>
+=====
+input	oh no
+output	oh no
+test out	no <eos>
+=====
+input	tomátelo con soda
+output	drink it with soda
+test out	con con <eos>
+=====
+input	sonríe
+output	smile
+test out	<eos>
+=====
+input	al ataque
+output	attack
+test out	uh uh
+=====
+input	atacad
+output	attack
+test out	uh <eos>
+=====
+input	levanta
+output	get up
+test out	uh uh
+=====
+input	ve ahora mismo
+output	go now
+test out	uh uh uh mismo <eos>
+=====
+input	lo tengo
+output	got it
+output	i got it
+test out	tengo tengo tengo <eos>
+=====
+input	lo pillas
+output	got it
+test out	<eos>
+=====
+input	entendiste
+output	got it
+test out	<eos>
+=====
+input	él corrió
+output	he ran
+test out	él <eos>
+=====
+input	métete adentro
+output	hop in
+test out	uh uh uh <eos>
+=====
+input	abrázame
+output	hug me
+test out	uh <eos>
+=====
+input	me caí
+output	i fell
+test out	<eos>
+=====
+input	yo lo sé
+output	i know
+test out	uh uh uh uh uh <eos>
+=====
+input	salí
+output	i left
+output	get out
+test out	<eos>
+=====
+input	mentí
+output	i lied
+test out	uh mentí mentí mentí mentí
+=====
+input	perdí
+output	i lost
+test out	<eos>
+=====
+input	dimito
+output	i quit
+output	i resign
+test out	<eos>
+=====
+input	renuncié
+output	i quit
+test out	uh uh
+=====
+input	estoy trabajando
+output	i work
+test out	trabajando <eos>
+=====
+input	tengo diecinueve
+output	i'm 19
+test out	uh uh <eos>
+=====
+input	estoy levantado
+output	i'm up
+test out	uh estoy <eos>
+=====
+input	escucha
+output	listen
+test out	escucha <eos>
+=====
+input	escuche
+output	listen
+test out	uh uh uh <eos>
+=====
+input	escuchen
+output	listen
+test out	escuchen
+=====
+input	no puede ser
+output	can not be
+test out	<eos>
+=====
+input	de ninguna manera
+output	no way
+output	no way
+test out	manera manera <eos>
+=====
+input	imposible
+output	no way
+test out	<eos>
+=====
+input	de ningún modo
+output	no way
+test out	ningún ningún <eos>
+=====
+input	de eso nada
+output	nothing about that
+test out	de de eso eso eso <eos>
+=====
+input	ni cagando
+output	no way
+test out	cagando cagando <eos>
+=====
+input	mangos
+output	no way
+test out	<eos>
+=====
+input	minga
+output	no way
+test out	uh <eos>
+=====
+input	ni en pedo
+output	not even fart
+test out	ni en en en <eos>
+=====
+input	en serio
+output	really
+test out	<eos>
+=====
+input	la verdad
+output	the truth
+test out	verdad verdad
+=====
+input	gracias
+output	thanks
+output	thanks
+test out	gracias <eos>
+=====
+input	pruébalo
+output	try it
+test out	uh <eos>
+=====
+input	lo procuramos
+output	we try
+test out	<eos>
+=====
+input	ganamos
+output	we won
+test out	<eos>
+=====
+input	por qué yo
+output	why me
+test out	uh por por <eos>
+=====
+input	pregúntale a tom
+output	ask tom
+test out	uh a <eos>
+=====
+input	órale
+output	awesome
+output	come on
+output	come on
+output	go away
+output	go away
+test out	uh <eos>
+=====
+input	mantente en calma
+output	be calm
+test out	en en en en <eos>
+=====
+input	estate tranquilo
+output	be cool
+test out	<eos>
+=====
+input	sé justo
+output	be fair
+test out	uh <eos>
+=====
+input	sean gentiles
+output	be kind
+test out	sean sean <eos>
+=====
+input	sé agradable
+output	be nice
+test out	<eos>
+=====
+input	pírate
+output	beat it
+test out	uh <eos>
+=====
+input	llamame
+output	call me
+test out	llamame <eos>
+=====
+input	llamadme
+output	call me
+test out	<eos>
+=====
+input	llámame
+output	call me
+test out	uh uh uh uh <eos>
+=====
+input	llámanos
+output	call us
+test out	uh <eos>
+=====
+input	entre
+output	come in
+output	go on in
+test out	uh uh uh <eos>
+=====
+input	pase
+output	come in
+test out	<eos>
+=====
+input	entren
+output	come in
+output	go on in
+test out	uh <eos>
+=====
+input	ándale
+output	come on
+test out	uh uh
+=====
+input	suéltalo
+output	drop it
+test out	<eos>
+=====
+input	agarra a tom
+output	get tom
+test out	<eos>
+=====
+input	bájate
+output	get out
+test out	<eos>
+=====
+input	sal
+output	get out
+test out	uh <eos>
+=====
+input	salid
+output	get out
+test out	<eos>
+=====
+input	salgan
+output	get out
+test out	<eos>
+=====
+input	vete de aquí
+output	go away
+output	get out of here
+output	get out of here
+test out	<eos>
+=====
+input	lárgate
+output	go away
+output	get out
+output	get away
+output	get lost
+test out	uh lárgate lárgate <eos>
+=====
+input	salga de aquí
+output	get out of here
+test out	de <eos>
+=====
+input	largo
+output	go away
+output	long
+output	get away
+output	get lost
+test out	<eos>
+=====
+input	vete ya
+output	go away
+output	go away
+output	go away
+test out	uh <eos>
+=====
+input	a la calle
+output	on the street
+test out	<eos>
+=====
+input	lárguese
+output	get out
+test out	lárguese <eos>
+=====
+input	vete a casa
+output	go home
+test out	a a <eos>
+=====
+input	vaya despacio
+output	go slow
+test out	despacio despacio <eos>
+=====
+input	hasta luego
+output	goodbye
+output	until then
+test out	uh uh <eos>
+=====
+input	hasta la vista
+output	goodbye
+output	until the view
+test out	hasta vista vista vista <eos>
+=====
+input	chau
+output	goodbye
+test out	<eos>
+=====
+input	espera un momento
+output	hang on
+test out	espera <eos>
+=====
+input	un segundo
+output	one second
+test out	un un <eos>
+=====
+input	agarra fuertemente
+output	hold tight
+output	hold on
+test out	uh <eos>
+=====
+input	él vino
+output	he came
+test out	uh uh <eos>
+=====
+input	él renunció
+output	he quit
+test out	uh <eos>
+=====
+input	ayúdame
+output	help me
+output	help me
+test out	uh uh uh uh uh <eos>
+=====
+input	échame una mano
+output	give me a hand
+test out	uh <eos>
+=====
+input	ayudame
+output	help me
+test out	<eos>
+=====
+input	ayúdanos
+output	help us
+test out	uh uh ayúdanos ayúdanos
+=====
+input	golpea a tom
+output	hit tom
+test out	uh <eos>
+=====
+input	resista
+output	hold on
+test out	uh <eos>
+=====
+input	resiste
+output	hold on
+test out	uh uh <eos>
+=====
+input	abraza a tom
+output	hug tom
+test out	uh a tom <eos>
+=====
+input	estoy de acuerdo
+output	i agree
+test out	uh <eos>
+=====
+input	de acuerdo
+output	agree
+test out	<eos>
+=====
+input	me incliné
+output	i bowed
+test out	<eos>
+=====
+input	me he mudado
+output	i moved
+test out	<eos>
+=====
+input	me mudé
+output	i moved
+test out	uh <eos>
+=====
+input	me trasladé
+output	i moved
+test out	<eos>
+=====
+input	me he trasladado
+output	i moved
+test out	<eos>
+=====
+input	dormí
+output	i slept
+test out	uh <eos>
+=====
+input	lo intenté
+output	i tried
+test out	uh lo <eos>
+=====
+input	iré
+output	i'll go
+test out	uh
+=====
+input	soy tom
+output	i'm tom
+test out	tom <eos>
+=====
+input	estoy gordo
+output	i'm fat
+output	am i fat
+test out	uh gordo <eos>
+=====
+input	soy gorda
+output	i'm fat
+output	i am fat
+test out	<eos>
+=====
+input	estoy en forma
+output	i'm fit
+test out	<eos>
+=====
+input	estoy afectado
+output	i'm affected
+test out	uh uh uh <eos>
+=====
+input	soy viejo
+output	i'm old
+test out	uh soy soy <eos>
+=====
+input	soy tímido
+output	i'm shy
+test out	soy <eos>
+=====
+input	estoy mojada
+output	i'm wet
+test out	<eos>
+=====
+input	está bien
+output	it's ok
+test out	<eos>
+=====
+input	soy yo
+output	it's me
+output	it's me
+test out	uh uh <eos>
+=====
+input	únete a nosotros
+output	join us
+test out	nosotros nosotros <eos>
+=====
+input	sé parte nuestra
+output	be part of us
+test out	parte parte <eos>
+=====
+input	guárdalo
+output	keep it
+test out	<eos>
+=====
+input	yo también
+output	me too
+test out	uh también <eos>
+=====
+input	abre
+output	open up
+test out	<eos>
+=====
+input	perfecto
+output	perfect
+test out	uh uh uh
+=====
+input	nos vemos
+output	see you
+test out	vemos <eos>
+=====
+input	muéstramelo
+output	show me
+test out	<eos>
+=====
+input	enséñamelo
+output	show me
+test out	<eos>
+=====
+input	mostrame
+output	show me
+test out	<eos>
+=====
+input	cierra la boca
+output	close your mouth
+test out	uh uh boca <eos>
+=====
+input	sáltatelo
+output	skip it
+test out	uh <eos>
+=====
+input	páralo
+output	stop it
+test out	páralo páralo <eos>
+=====
+input	deténlo
+output	stop it
+test out	<eos>
+=====
+input	cógelo
+output	take it
+test out	<eos>
+=====
+input	decime
+output	tell me
+test out	uh <eos>
+=====
+input	tom comió
+output	tom ate
+test out	tom <eos>
+=====
+input	tom corrió
+output	tom ran
+test out	uh uh uh corrió <eos>
+=====
+input	tom ganó
+output	tom won
+test out	uh ganó <eos>
+=====
+input	espérame despierto
+output	wait for me awake
+test out	uh <eos>
+=====
+input	despierta
+output	wake up
+output	wake up
+output	get real
+test out	despierta despierta
+=====
+input	despiértate
+output	wake up
+test out	uh <eos>
+=====
+input	despertate
+output	wake up
+test out	uh uh <eos>
+=====
+input	lávate las manos
+output	wash your hands
+test out	<eos>
+=====
+input	nos preocupamos
+output	we care
+test out	<eos>
+=====
+input	lo sabemos
+output	we know
+test out	lo <eos>
+=====
+input	perdimos
+output	we lost
+test out	<eos>
+=====
+input	bienvenidos
+output	welcome
+test out	bienvenidos <eos>
+=====
+input	bienvenidas
+output	welcome
+test out	uh <eos>
+=====
+input	quién comió
+output	who ate
+test out	<eos>
+=====
+input	quién corría
+output	who ran
+test out	<eos>
+=====
+input	quién corrió
+output	who ran
+test out	corrió <eos>
+=====
+input	quién ganó
+output	who won
+test out	uh uh uh uh <eos>
+=====
+input	quién ha ganado
+output	who won
+test out	uh <eos>
+=====
+input	por qué no
+output	why not
+test out	uh qué <eos>
+=====
+input	has ganado
+output	you won
+test out	uh uh uh
+=====
+input	preguntales
+output	ask them
+test out	<eos>
+=====
+input	pregúntales
+output	ask them
+test out	uh <eos>
+=====
+input	aparta
+output	back off
+test out	<eos>
+=====
+input	apártate
+output	back off
+test out	<eos>
+=====
+input	sé un hombre
+output	be a man
+test out	uh uh uh uh uh uh <eos>
+=====
+input	sé fuerte
+output	be brave
+test out	sé <eos>
+=====
+input	sé breve
+output	be brief
+test out	uh breve <eos>
+=====
+input	sea breve
+output	be brief
+test out	sea sea sea <eos>
+=====
+input	sean breves
+output	be brief
+test out	sean breves breves breves breves <eos>
+=====
+input	estate quieto
+output	be quiet
+test out	uh quieto quieto <eos>
+=====
+input	no te muevas
+output	do not move
+test out	uh <eos>
+=====
+input	llamalo a tomás
+output	call tom
+test out	uh <eos>
+=====
+input	llámalo a tomás
+output	call tom
+test out	uh a <eos>
+=====
+input	llámenlo a tomás
+output	call tom
+test out	uh <eos>
+=====
+input	anímate
+output	cheer up
+test out	<eos>
+=====
+input	venga
+output	cheer up
+test out	uh
+=====
+input	cálmate
+output	cool off
+test out	cálmate cálmate cálmate <eos>
+=====
+input	espósale
+output	cuff him
+test out	espósale <eos>
+=====
+input	no te vayas
+output	don't go
+test out	<eos>
+=====
+input	encontralo a tomás
+output	find tom
+test out	<eos>
+=====
+input	encuéntralo a tomás
+output	find tom
+test out	<eos>
+=====
+input	encuéntrelo a tomás
+output	find tom
+test out	<eos>
+=====
+input	encuéntrenlo a tomás
+output	find tom
+test out	encuéntrenlo encuéntrenlo encuéntrenlo encuéntrenlo encuéntrenlo <eos>
+=====
+input	encuentre a tom
+output	find tom
+test out	tom <eos>
+=====
+input	encuentren a tom
+output	find tom
+test out	<eos>
+=====
+input	arregla esto
+output	fix this
+test out	uh arregla arregla arregla <eos>
+=====
+input	ponte a ello
+output	get to it
+test out	uh <eos>
+=====
+input	abajo
+output	get down
+test out	<eos>
+=====
+input	túmbate
+output	get down
+test out	uh uh <eos>
+=====
+input	piérdete
+output	get lost
+test out	uh piérdete
+=====
+input	esfúmate
+output	get lost
+test out	esfúmate esfúmate <eos>
+=====
+input	piénsalo bien
+output	think wisely
+test out	<eos>
+=====
+input	abre los ojos
+output	open your eyes
+test out	abre abre <eos>
+=====
+input	adelante
+output	go ahead
+output	go ahead
+test out	<eos>
+=====
+input	entra
+output	go on in
+test out	<eos>
+=====
+input	entrá
+output	go on in
+test out	<eos>
+=====
+input	entrad
+output	go on in
+test out	
+=====
+input	buen trabajo
+output	good job
+test out	<eos>
+=====
+input	sujeta a tom
+output	grab tom
+test out	uh <eos>
+=====
+input	agárralo
+output	grab him
+test out	uh
+=====
+input	diviértanse
+output	have fun
+test out	uh diviértanse <eos>
+=====
+input	pásala bien
+output	have fun
+test out	<eos>
+=====
+input	pásenla bien
+output	have fun
+test out	<eos>
+=====
+input	él habló
+output	he spoke
+test out	habló habló <eos>
+=====
+input	él lo intenta
+output	he tries
+test out	uh <eos>
+=====
+input	él prueba
+output	he tests
+test out	prueba <eos>
+=====
+input	ayuda a tom
+output	help tom
+test out	<eos>
+=====
+input	ayúdalo
+output	help him
+test out	uh uh uh uh uh
+=====
+input	hola qué hay
+output	hi what's up
+test out	uh <eos>
+=====
+input	ey chavales
+output	hey kids
+test out	<eos>
+=====
+input	qué pasa troncos
+output	what's up logs
+test out	<eos>
+=====
+input	buenas
+output	good
+test out	uh uh <eos>
+=====
+input	qué tal os va
+output	how are you doing
+test out	<eos>
+=====
+input	hola por aquí
+output	hello over here
+test out	uh uh <eos>
+=====
+input	qué encanto
+output	how cute
+test out	<eos>
+=====
+input	qué tan profundo
+output	how deep
+test out	uh <eos>
+=====
+input	cómo de profundo
+output	how deep
+test out	uh uh uh <eos>
+=====
+input	hazme el favor
+output	do me the favor
+test out	hazme hazme hazme hazme hazme <eos>
+=====
+input	compláceme
+output	please me
+test out	uh
+=====
+input	date prisa
+output	hurry up
+test out	uh <eos>
+=====
+input	apresúrate
+output	hurry up
+test out	apresúrate <eos>
+=====
+input	convine
+output	i agreed
+test out	<eos>
+=====
+input	acepté
+output	i agreed
+test out	
+=====
+input	accedí
+output	i agreed
+test out	<eos>
+=====
+input	estoy viejo
+output	i am old
+test out	uh uh <eos>
+=====
+input	me lo comí
+output	i ate it
+test out	uh <eos>
+=====
+input	me la comí
+output	i ate it
+test out	uh me me <eos>
+=====
+input	puedo ir
+output	i can go
+test out	puedo <eos>
+=====
+input	lo hice bien
+output	i did ok
+test out	<eos>
+=====
+input	lo hice
+output	i did it
+test out	lo hice <eos>
+=====
+input	fracasé
+output	i failed
+test out	<eos>
+=====
+input	lo olvidé
+output	i forgot
+test out	uh <eos>
+=====
+input	me las arreglo
+output	i get by
+test out	uh arreglo arreglo <eos>
+=====
+input	lo entiendo
+output	i get it
+test out	lo <eos>
+=====
+input	llamé por teléfono
+output	i phoned
+test out	por teléfono <eos>
+=====
+input	me niego
+output	i refuse
+test out	uh uh <eos>
+=====
+input	renuncio
+output	i resign
+test out	renuncio renuncio <eos>
+=====
+input	lo vi
+output	i saw it
+test out	uh uh <eos>
+=====
+input	sonreí
+output	i smiled
+test out	sonreí <eos>
+=====
+input	me quedé
+output	i stayed
+test out	uh quedé <eos>
+=====
+input	hablé
+output	i talked
+test out	uh <eos>
+=====
+input	hablaba
+output	i talked
+test out	uh <eos>
+=====
+input	charlé
+output	i talked
+test out	<eos>
+=====
+input	charlaba
+output	i talked
+test out	uh uh <eos>
+=====
+input	yo lo uso
+output	i use it
+test out	<eos>
+=====
+input	esperé
+output	i waited
+test out	uh esperé <eos>
+=====
+input	yo pagaré
+output	i'll pay
+test out	uh uh uh <eos>
+=====
+input	he vuelto
+output	i'm back
+test out	uh vuelto vuelto vuelto vuelto <eos>
+=====
+input	estoy de vuelta
+output	i'm back
+test out	uh <eos>
+=====
+input	soy calvo
+output	i'm bald
+test out	soy calvo <eos>
