@@ -193,8 +193,10 @@ class Pinokio4(gym.Env):
 
         done = not not (self.output and self.output[-1] == self._word_to_index( "<eos>" ))
 
-        if self.nsteps > self.starting_sentance_length * 4:
-            reward -= (self.nsteps - self.starting_sentance_length) * 10
+        #I think this is swamping the other signals.
+        #
+        # if self.nsteps > self.starting_sentance_length * 4:
+        #     reward -= (self.nsteps - self.starting_sentance_length) * 10
         
             
         if not done:
@@ -360,7 +362,7 @@ class Pinokio4(gym.Env):
         self.regs = [ self._word_to_index( "uh" ) ] * NUM_REGS
         self.dictionary = []
         self.unique_words_pulled_from_dict = []
-        self.unique_words_pushed_to_dict = []
+        self.unique_words_pushed_to_dict = [self._word_to_index( "uh" )]
         
         
     def _grade_sentance( self, talk=False ):
