@@ -249,7 +249,8 @@ class Pinokio4(gym.Env):
                 if push_or_pull == PUSH_TO:
                     self.dictionary = self.words["index_to_word"][str(self.regs[reg_index])]["dict"][:]
                     if not self.regs[reg_index] in self.unique_words_pushed_to_dict:
-                        self.unique_words_pushed_to_dict.append( self.dictionary )
+                        self.unique_words_pushed_to_dict.append( self.regs[reg_index] )
+                        reward += 1
                     else:
                         #don't want to keep pushing the same word over and over to dictionary.
                         reward -= 1
