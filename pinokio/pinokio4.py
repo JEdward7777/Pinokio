@@ -197,6 +197,10 @@ class Pinokio4(gym.Env):
         #
         # if self.nsteps > self.starting_sentance_length * 4:
         #     reward -= (self.nsteps - self.starting_sentance_length) * 10
+
+        #It might have been needed, but perhaps this is more gental.
+        if self.nsteps > self.starting_sentance_length * 5:
+            reward -= 5
         
             
         if not done:
@@ -204,7 +208,6 @@ class Pinokio4(gym.Env):
             self.action_history = self.action_history + list(action)
             while len( self.action_history ) > 20:
                 self.action_history.pop(0)
-            self.last_actions = action
             #action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
             #what_dec = {NOOP: "nothing", OUTPUT:"output",STACK:"stack",DIC:"dic",INPUT:"input"}
             
@@ -216,8 +219,8 @@ class Pinokio4(gym.Env):
             elif target == OUTPUT:
                 if push_or_pull == PUSH_TO:
                     self.output.append( self.regs[action[2]] )
-                    #push to output. One point if consumed words is greater then the output length. -1 point for each push double the length of the input.
-                    if self.starting_sentance_length - len(self._input) > len(self.output):
+                    #push to output. One point if consumed words is greater or equal to the output length. -1 point for each push double the length of the input.
+                    if self.starting_sentance_length - len(self._input) >= len(self.output):
                         reward += 1
                     if len(self.output) > 2*self.starting_sentance_length:
                         reward -= 1
@@ -274,6 +277,11 @@ class Pinokio4(gym.Env):
                 if push_or_pull == PUSH_TO:
                     pass #can't push to input.
                 elif push_or_pull == PULL_FROM:
+                    
+                    #if we just pulled from the input then penalize for pulling from the input again without doing something else first.
+                    if action == self.last_actions:
+                        reward -= 5
+
                     if self._input:
                         #pull from input. No reward if the input is empty. One point if consumed words is less than output length.
                         if self.starting_sentance_length - len(self._input) <= len(self.output):
@@ -293,6 +301,9 @@ class Pinokio4(gym.Env):
         obs = self._construct_observations()
 
         if done: returned_done = True
+
+
+        self.last_actions = action
         
         return obs, reward, done, {} 
 
@@ -358,7 +369,7 @@ class Pinokio4(gym.Env):
         
         #probably shouldn't reset the stack, but when the sentaces are random it doesn't make sense to keep it.
         self.stack = []
-        self.unique_words_pulled_from_stack = []
+        self.unique_words_pulled_from_stack = [self._word_to_index( "uh" )]
         self.regs = [ self._word_to_index( "uh" ) ] * NUM_REGS
         self.dictionary = []
         self.unique_words_pulled_from_dict = []

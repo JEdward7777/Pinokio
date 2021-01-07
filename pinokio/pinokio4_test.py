@@ -41,8 +41,8 @@ def translate_all_pairs():
             done = False
             while not done and env.nsteps < 1000:
                 action, _ = model.predict(obs)
-                print( env.decode_action(action) )
-                obs, _, done, _ = env.step(action)
+                obs, reward, done, _ = env.step(action)
+                print( "{} -> {}".format( env.decode_action(action), reward ) )
 
             fout.write( "=====\n")
             fout.write( "input\t" + " ".join(env.translate_list(pair._input)) + "\n" )
