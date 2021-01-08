@@ -277,9 +277,9 @@ class Pinokio4(gym.Env):
                 if push_or_pull == PUSH_TO:
                     pass #can't push to input.
                 elif push_or_pull == PULL_FROM:
-                    
+
                     #if we just pulled from the input then penalize for pulling from the input again without doing something else first.
-                    if action == self.last_actions:
+                    if np.equal( action, self.last_actions ).all():
                         reward -= 5
 
                     if self._input:
