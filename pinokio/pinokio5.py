@@ -22,13 +22,7 @@ class SentancePair:
     def __str__( self ):
         return "{} -> {}".format( self._input, self.outputs )
     
-NOOP = 0
-PUSH_TO = 1
-PULL_FROM = 2
-OUTPUT = 1
-STACK = 2
-DIC = 3
-INPUT = 4
+
 
 
 NUM_PAIRS = 300
@@ -42,10 +36,10 @@ DICT_CONTEXT = 20
 NUM_REGS = 100
 
 
-action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
-what_dec = {NOOP: "nothing", OUTPUT:"output",STACK:"stack",DIC:"dic",INPUT:"input"}
-
-class Pinokio4(gym.Env):
+#The point of pinokio5 is that instead of using descrete actions, it uses the box continuous space and then uses a random weighted selection to pick the action.
+#The point of this is so that it doesn't get stuck not having exploration and can see how just being slightly more positive for a particular action
+#changes the score on average and perahaps can feel the slope to the right thing to do instead of being stuck not rolling on a step.
+class Pinokio5(gym.Env):
     nsteps = 0
     
     words = None
@@ -73,7 +67,7 @@ class Pinokio4(gym.Env):
     returned_done = False
     
     def clone( self ):
-        result = Pinokio4( skip_load=True )
+        result = Pinokio5( skip_load=True )
         result.nsteps = self.nsteps
         result.words = self.words
         result.starting_sentance_length = self.starting_sentance_length
@@ -103,9 +97,15 @@ class Pinokio4(gym.Env):
         return [self.words['index_to_word'][str(word)]['word'] for word in word_list ]  
 
     def decode_action( self, action=None ):
-        if action is None: action = self.last_actions
-        if action is None: return "None"
-        return action_dec[action[0]] + " " + what_dec[action[1]] + " with reg " + str( action[2] )
+        if action is None:
+            try:
+                return self.action_description[ self.selected_action ] + " with " + str( self.reg_index )
+            except AttributeError:
+                return "None"
+        else:
+            possible_selected_action = random.choices( range(self.NUM_DIRECTIONS), weights=action[:self.NUM_DIRECTIONS] )[0]
+            possible_reg_index = int(action[-1])
+            return "possibly " + self.action_description[ possible_selected_action ] + " with " + str( possible_reg_index )
         
 
     def str_render( self ):
@@ -143,7 +143,40 @@ class Pinokio4(gym.Env):
         #1: what thing   0 noop 1 output, 2 stack, 3 dictionary, 4 input
         #2: to where
         #self.action_space = spaces.Tuple((spaces.Discrete(2), spaces.Discrete(4))) 
-        self.action_space = spaces.MultiDiscrete( [3,5,NUM_REGS] )
+        #self.action_space = spaces.MultiDiscrete( [3,5,NUM_REGS] )
+
+        i = 0
+        self.PUSH_OUTPUT = i
+        i += 1
+        self.PUSH_STACK = i
+        i += 1
+        self.PULL_STACK = i
+        i += 1
+        self.PUSH_DICT = i
+        i += 1
+        self.PULL_DICT = i
+        i += 1
+        self.PULL_INPUT = i
+        i += 1
+        self.NUM_DIRECTIONS = i
+
+        self.REGISTER_N = i
+        i += 1
+        self.ACTION_SPACE_LENGTH = i
+
+        self.action_description = {
+            self.PUSH_OUTPUT : "push to output",
+            self.PUSH_STACK : "push to stack",
+            self.PULL_STACK : "pull from stack",
+            self.PUSH_DICT : "push to dictionary",
+            self.PULL_DICT : "pull from dictionary",
+            self.PULL_INPUT: "pull from input"
+        }
+
+        self.ACTION_LOW = 0
+        self.ACTION_HIGH = NUM_REGS
+
+        self.action_space = spaces.Box(low=self.ACTION_LOW,high=self.ACTION_HIGH,shape=(self.ACTION_SPACE_LENGTH,))
         obs = self.reset()
         self.observation_space = spaces.Box(low=0, high=10000000, shape=(len(obs),), dtype=np.int32)
         
@@ -187,10 +220,6 @@ class Pinokio4(gym.Env):
 
         reward = 0
 
-        push_or_pull = action[0]
-        target = action[1]
-        reg_index = action[2]
-
         done = not not (self.output and self.output[-1] == self._word_to_index( "<eos>" ))
 
         #I think this is swamping the other signals.
@@ -203,11 +232,15 @@ class Pinokio4(gym.Env):
             reward -= 5
 
         reward -= .1 #finishing sooner is best.
-        
+
+
+        #decode action with randomness depending on sertanty.
+        self.selected_action = random.choices( range(self.NUM_DIRECTIONS), weights=action[:self.NUM_DIRECTIONS] )[0]
+        self.reg_index = int(action[-1])
             
         if not done:
             if self.action_history is None: self.action_history = [0]*20
-            self.action_history = self.action_history + list(action)
+            self.action_history = self.action_history + [self.selected_action,self.reg_index]
             while len( self.action_history ) > 20:
                 self.action_history.pop(0)
             #action_dec = {NOOP: "nothing", PUSH_TO:"push to",PULL_FROM:"pull from"}
@@ -215,13 +248,10 @@ class Pinokio4(gym.Env):
             
             #print( action_dec[push_or_pull] + " " + what_dec[target] )
 
-            if target == NOOP or push_or_pull == NOOP:
-                #reward -= 1e5
-                reward -= 5 #be gentle
+
             
-            elif target == OUTPUT:
-                if push_or_pull == PUSH_TO:
-                    self.output.append( self.regs[action[2]] )
+            if self.selected_action == self.PUSH_OUTPUT:
+                    self.output.append( self.regs[self.reg_index] )
                     #push to output. One point if consumed words is greater or equal to the output length. -1 point for each push double the length of the input.
                     if self.starting_sentance_length - len(self._input) >= len(self.output):
                         reward += 1
@@ -229,64 +259,48 @@ class Pinokio4(gym.Env):
                         reward -= 1
                         
                     #once end of sentance has been pushed we are done.
-                    if self.regs[reg_index] == self._word_to_index( "<eos>" ):
+                    if self.regs[self.reg_index] == self._word_to_index( "<eos>" ):
                         done = True
-                elif push_or_pull == PULL_FROM:
-                    #We really don't need to be pulling from the output.
-                    reward -= 5
 
-                    if self.output:
-                        self.regs[reg_index] = self.output[-1]
-                    else:
-                        self.regs[reg_index] = self._word_to_index( "uh" )
-                        
-            elif target == STACK:
-                if push_or_pull == PUSH_TO:
-                    self.stack.append( self.regs[reg_index] )
+            elif self.selected_action == self.PUSH_STACK:
+                    self.stack.append( self.regs[self.reg_index] )
                     #push to stack. No reward. Negative 1 point if stack is longer than input.
                     if len(self.stack) > self.starting_sentance_length:
                         reward -= 1
-                elif push_or_pull == PULL_FROM:
+
+            elif self.selected_action == self.PULL_STACK:
                     if self.stack:
-                        self.regs[reg_index] = self.stack.pop()
+                        self.regs[self.reg_index] = self.stack.pop()
                         #pull from stack. No reward if stack is empty. One point for each unique word per sentance.
-                        if self.regs[reg_index] not in self.unique_words_pulled_from_stack:
-                            self.unique_words_pulled_from_stack.append( self.regs[reg_index] )
+                        if self.regs[self.reg_index] not in self.unique_words_pulled_from_stack:
+                            self.unique_words_pulled_from_stack.append( self.regs[self.reg_index] )
                             reward += 1
                     else:
-                        self.regs[reg_index] = self._word_to_index( "uh" )
+                        self.regs[self.reg_index] = self._word_to_index( "uh" )
                         reward -= 5
                         
-            elif target == DIC:
-                if push_or_pull == PUSH_TO:
-                    self.dictionary = self.words["index_to_word"][str(self.regs[reg_index])]["dict"][:]
-                    if not self.regs[reg_index] in self.unique_words_pushed_to_dict:
-                        self.unique_words_pushed_to_dict.append( self.regs[reg_index] )
+            elif self.selected_action == self.PUSH_DICT:
+                    self.dictionary = self.words["index_to_word"][str(self.regs[self.reg_index])]["dict"][:]
+                    if not self.regs[self.reg_index] in self.unique_words_pushed_to_dict:
+                        self.unique_words_pushed_to_dict.append( self.regs[self.reg_index] )
                         reward += 1
                     else:
                         #don't want to keep pushing the same word over and over to dictionary.
                         reward -= 1
 
-                elif push_or_pull == PULL_FROM:
+            elif self.selected_action == self.PULL_DICT:
                     if self.dictionary:
-                        self.regs[reg_index] = self.dictionary.pop(0)
+                        self.regs[self.reg_index] = self.dictionary.pop(0)
                         #pull from dict. One point for the first pull on each unique word.
-                        if self.regs[reg_index] not in self.unique_words_pulled_from_dict:
-                            self.unique_words_pulled_from_dict.append( self.regs[reg_index] )
+                        if self.regs[self.reg_index] not in self.unique_words_pulled_from_dict:
+                            self.unique_words_pulled_from_dict.append( self.regs[self.reg_index] )
                             reward += 1
                             
                     else:
-                        self.regs[reg_index] = self._word_to_index( "uh" )
+                        self.regs[self.reg_index] = self._word_to_index( "uh" )
                         reward -= 5
                         
-            
-            
-            elif target == INPUT:
-                if push_or_pull == PUSH_TO:
-                    reward -= 5
-                    pass #can't push to input.
-                elif push_or_pull == PULL_FROM:
-
+            elif self.selected_action == self.PULL_INPUT:
                     #if we just pulled from the input then penalize for pulling from the input again without doing something else first.
                     if np.equal( action, self.last_actions ).all():
                         reward -= 5
@@ -295,9 +309,9 @@ class Pinokio4(gym.Env):
                         #pull from input. No reward if the input is empty. One point if consumed words is less than output length.
                         if self.starting_sentance_length - len(self._input) <= len(self.output):
                             reward += 1
-                        self.regs[reg_index] = self._input.pop(0)
+                        self.regs[self.reg_index] = self._input.pop(0)
                     else:
-                        self.regs[reg_index] = self._word_to_index( "<eos>" )
+                        self.regs[self.reg_index] = self._word_to_index( "<eos>" )
                 
                 
             #if it has fooled around long enough, just grade the sentance.
@@ -490,14 +504,14 @@ class Pinokio4(gym.Env):
         return best_result
         
         
-save_file = "pinokio4.save"
-tb_log_name = "with_registers_1"
+save_file = "pinokio5.save"
+tb_log_name = "box_1"
         
 def main():
 
     tensorboard_log = "./log"
 
-    env = Pinokio4()
+    env = Pinokio5()
     # Optional: PPO2 requires a vectorized environment to run
     # the env is now wrapped automatically when passing it to the constructor
     # env = DummyVecEnv([lambda: env])
