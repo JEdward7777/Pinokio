@@ -201,6 +201,8 @@ class Pinokio4(gym.Env):
         #It might have been needed, but perhaps this is more gental.
         if self.nsteps > self.starting_sentance_length * 5:
             reward -= 5
+
+        reward -= .1 #finishing sooner is best.
         
             
         if not done:
@@ -214,7 +216,8 @@ class Pinokio4(gym.Env):
             #print( action_dec[push_or_pull] + " " + what_dec[target] )
 
             if target == NOOP or push_or_pull == NOOP:
-                reward -= 1e5
+                #reward -= 1e5
+                reward -= 5 #be gentle
             
             elif target == OUTPUT:
                 if push_or_pull == PUSH_TO:
@@ -229,6 +232,9 @@ class Pinokio4(gym.Env):
                     if self.regs[reg_index] == self._word_to_index( "<eos>" ):
                         done = True
                 elif push_or_pull == PULL_FROM:
+                    #We really don't need to be pulling from the output.
+                    reward -= 5
+
                     if self.output:
                         self.regs[reg_index] = self.output[-1]
                     else:
@@ -249,6 +255,7 @@ class Pinokio4(gym.Env):
                             reward += 1
                     else:
                         self.regs[reg_index] = self._word_to_index( "uh" )
+                        reward -= 5
                         
             elif target == DIC:
                 if push_or_pull == PUSH_TO:
@@ -270,11 +277,13 @@ class Pinokio4(gym.Env):
                             
                     else:
                         self.regs[reg_index] = self._word_to_index( "uh" )
+                        reward -= 5
                         
             
             
             elif target == INPUT:
                 if push_or_pull == PUSH_TO:
+                    reward -= 5
                     pass #can't push to input.
                 elif push_or_pull == PULL_FROM:
 
