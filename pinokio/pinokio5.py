@@ -28,12 +28,12 @@ class SentancePair:
 NUM_PAIRS = 300
 
 
-OUTPUT_CONTEXT = 100
-INPUT_CONTEXT = 100
-STACK_CONTEXT = 100
-DICT_CONTEXT = 20
+OUTPUT_CONTEXT = 2 #100
+INPUT_CONTEXT = 3 #100
+STACK_CONTEXT = 2 #100
+DICT_CONTEXT = 3 #20
 
-NUM_REGS = 100
+NUM_REGS = 3 #100
 
 
 #The point of pinokio5 is that instead of using descrete actions, it uses the box continuous space and then uses a random weighted selection to pick the action.
@@ -158,6 +158,10 @@ class Pinokio5(gym.Env):
         i += 1
         self.PULL_INPUT = i
         i += 1
+        self.PULL_INPUT_AND_PUSH_PULL_DICT_COMBO = i
+        i += 1
+        self.PULL_INPUT_AND_PUSH_DOUBLE_PULL_DICT_COMBO = i
+        i += 1
         self.NUM_DIRECTIONS = i
 
         self.REGISTER_N = i
@@ -170,11 +174,13 @@ class Pinokio5(gym.Env):
             self.PULL_STACK : "pull from stack",
             self.PUSH_DICT : "push to dictionary",
             self.PULL_DICT : "pull from dictionary",
-            self.PULL_INPUT: "pull from input"
+            self.PULL_INPUT: "pull from input",
+            self.PULL_INPUT_AND_PUSH_PULL_DICT_COMBO: "pull from input, and push pull dictionary",
+            self.PULL_INPUT_AND_PUSH_DOUBLE_PULL_DICT_COMBO: "pull input, push dict, and double pull"
         }
 
         self.ACTION_LOW = 0
-        self.ACTION_HIGH = NUM_REGS
+        self.ACTION_HIGH = NUM_REGS-1
 
         self.action_space = spaces.Box(low=self.ACTION_LOW,high=self.ACTION_HIGH,shape=(self.ACTION_SPACE_LENGTH,))
         obs = self.reset()
@@ -312,6 +318,92 @@ class Pinokio5(gym.Env):
                         self.regs[self.reg_index] = self._input.pop(0)
                     else:
                         self.regs[self.reg_index] = self._word_to_index( "<eos>" )
+
+            elif self.selected_action == self.PULL_INPUT_AND_PUSH_PULL_DICT_COMBO:
+                #PULL-INPUT----------------------
+                #if we just pulled from the input then penalize for pulling from the input again without doing something else first.
+                if np.equal( action, self.last_actions ).all():
+                    reward -= 5
+
+                if self._input:
+                    #pull from input. No reward if the input is empty. One point if consumed words is less than output length.
+                    if self.starting_sentance_length - len(self._input) <= len(self.output):
+                        reward += 1
+                    self.regs[self.reg_index] = self._input.pop(0)
+                else:
+                    self.regs[self.reg_index] = self._word_to_index( "<eos>" )
+
+                #PUSH_DICT----------------------------
+                self.dictionary = self.words["index_to_word"][str(self.regs[self.reg_index])]["dict"][:]
+                if not self.regs[self.reg_index] in self.unique_words_pushed_to_dict:
+                    self.unique_words_pushed_to_dict.append( self.regs[self.reg_index] )
+                    reward += 1
+                else:
+                    #don't want to keep pushing the same word over and over to dictionary.
+                    reward -= 1
+
+                #PULL_DICT------------------------------
+                if self.dictionary:
+                    self.regs[self.reg_index] = self.dictionary.pop(0)
+                    #pull from dict. One point for the first pull on each unique word.
+                    if self.regs[self.reg_index] not in self.unique_words_pulled_from_dict:
+                        self.unique_words_pulled_from_dict.append( self.regs[self.reg_index] )
+                        reward += 1
+                        
+                else:
+                    self.regs[self.reg_index] = self._word_to_index( "uh" )
+                    reward -= 5
+
+            elif self.selected_action == self.PULL_INPUT_AND_PUSH_DOUBLE_PULL_DICT_COMBO:
+                #PULL-INPUT----------------------
+                #if we just pulled from the input then penalize for pulling from the input again without doing something else first.
+                if np.equal( action, self.last_actions ).all():
+                    reward -= 5
+
+                if self._input:
+                    #pull from input. No reward if the input is empty. One point if consumed words is less than output length.
+                    if self.starting_sentance_length - len(self._input) <= len(self.output):
+                        reward += 1
+                    self.regs[self.reg_index] = self._input.pop(0)
+                else:
+                    self.regs[self.reg_index] = self._word_to_index( "<eos>" )
+
+                #PUSH_DICT----------------------------
+                self.dictionary = self.words["index_to_word"][str(self.regs[self.reg_index])]["dict"][:]
+                if not self.regs[self.reg_index] in self.unique_words_pushed_to_dict:
+                    self.unique_words_pushed_to_dict.append( self.regs[self.reg_index] )
+                    reward += 1
+                else:
+                    #don't want to keep pushing the same word over and over to dictionary.
+                    reward -= 1
+
+                #PULL_DICT------------------------------
+                if self.dictionary:
+                    self.regs[self.reg_index] = self.dictionary.pop(0)
+                    #pull from dict. One point for the first pull on each unique word.
+                    if self.regs[self.reg_index] not in self.unique_words_pulled_from_dict:
+                        self.unique_words_pulled_from_dict.append( self.regs[self.reg_index] )
+                        reward += 1
+                        
+                else:
+                    self.regs[self.reg_index] = self._word_to_index( "uh" )
+                    reward -= 5
+
+                #PULL_DICT------------------------------
+                if self.dictionary:
+                    self.regs[self.reg_index] = self.dictionary.pop(0)
+                    #pull from dict. One point for the first pull on each unique word.
+                    if self.regs[self.reg_index] not in self.unique_words_pulled_from_dict:
+                        self.unique_words_pulled_from_dict.append( self.regs[self.reg_index] )
+                        #no extra rewards just for a different word selection
+                        #reward += 1
+                        
+                else:
+                    self.regs[self.reg_index] = self._word_to_index( "uh" )
+                    #no extra rewards just for a different word selection
+                    #reward -= 5
+
+                
                 
                 
             #if it has fooled around long enough, just grade the sentance.
@@ -505,7 +597,7 @@ class Pinokio5(gym.Env):
         
         
 save_file = "pinokio5.save"
-tb_log_name = "box_1"
+tb_log_name = "combos_1"
         
 def main():
 
