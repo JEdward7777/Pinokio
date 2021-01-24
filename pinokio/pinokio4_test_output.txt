@@ -1,79 +1,79 @@
 =====
 input	ve
 output	go
-test out	ve ve <eos>
+test out	
 =====
 input	vete
 output	go
-test out	vete <eos>
+test out	
 =====
 input	vaya
 output	go
-test out	<eos>
+test out	
 =====
 input	váyase
 output	go
 output	go away
-test out	uh uh uh <eos>
+test out	
 =====
 input	hola
 output	hi
 output	hello
-test out	uh uh
+test out	
 =====
 input	corre
 output	run
 output	you run
-test out	<eos>
+test out	
 =====
 input	corred
 output	run
-test out	uh <eos>
+test out	
 =====
 input	quién
 output	who
-test out	<eos>
+test out	
 =====
 input	fuego
 output	fire
-test out	uh <eos>
+test out	
 =====
 input	incendio
 output	fire
-test out	incendio incendio <eos>
+test out	
 =====
 input	disparad
 output	fire
-test out	uh
+test out	
 =====
 input	ayuda
 output	help
-test out	<eos>
+test out	
 =====
 input	socorro auxilio
 output	help
-test out	socorro <eos>
+test out	
 =====
 input	auxilio
 output	help
-test out	auxilio <eos>
+test out	
 =====
 input	salta
 output	jump
-test out	uh <eos>
+test out	
 =====
 input	salte
 output	jump
 output	get out
-test out	uh uh uh uh
+test out	
 =====
 input	parad
 output	stop
-test out	<eos>
+test out	
 =====
 input	para
 output	stop
-test out	<eos>
+test out	
 =====
 input	pare
 output	stop
@@ -83,24 +83,24 @@ input	espera
 output	wait
 output	hang on
 output	hold it
-test out	<eos>
+test out	
 =====
 input	esperen
 output	wait
-test out	uh <eos>
+test out	
 =====
 input	continúa
 output	go on
 output	drive on
-test out	<eos>
+test out	
 =====
 input	continúe
 output	go on
-test out	<eos>
+test out	
 =====
 input	corrí
 output	i ran
-test out	<eos>
+test out	
 =====
 input	corría
 output	i ran
@@ -108,188 +108,188 @@ test out
 =====
 input	lo intento
 output	i try
-test out	<eos>
+test out	
 =====
 input	he ganado
 output	i won
-test out	uh uh <eos>
+test out	
 =====
 input	oh no
 output	oh no
-test out	uh uh oh oh oh oh <eos>
+test out	
 =====
 input	tomátelo con soda
 output	drink it with soda
-test out	uh uh <eos>
+test out	
 =====
 input	sonríe
 output	smile
-test out	uh <eos>
+test out	
 =====
 input	al ataque
 output	attack
-test out	uh <eos>
+test out	
 =====
 input	atacad
 output	attack
-test out	uh uh atacad atacad atacad atacad atacad atacad atacad
+test out	
 =====
 input	levanta
 output	get up
-test out	uh uh <eos>
+test out	
 =====
 input	ve ahora mismo
 output	go now
-test out	mismo <eos>
+test out	
 =====
 input	lo tengo
 output	got it
 output	i got it
-test out	uh lo lo tengo <eos>
+test out	
 =====
 input	lo pillas
 output	got it
-test out	uh <eos>
+test out	
 =====
 input	entendiste
 output	got it
-test out	uh entendiste entendiste
+test out	
 =====
 input	él corrió
 output	he ran
-test out	él corrió <eos>
+test out	
 =====
 input	métete adentro
 output	hop in
-test out	adentro adentro adentro adentro <eos>
+test out	
 =====
 input	abrázame
 output	hug me
-test out	uh
+test out	
 =====
 input	me caí
 output	i fell
-test out	uh uh <eos>
+test out	
 =====
 input	yo lo sé
 output	i know
-test out	<eos>
+test out	
 =====
 input	salí
 output	i left
 output	get out
-test out	uh uh <eos>
+test out	
 =====
 input	mentí
 output	i lied
-test out	uh <eos>
+test out	
 =====
 input	perdí
 output	i lost
-test out	uh uh <eos>
+test out	
 =====
 input	dimito
 output	i quit
 output	i resign
-test out	<eos>
+test out	
 =====
 input	renuncié
 output	i quit
-test out	<eos>
+test out	
 =====
 input	estoy trabajando
 output	i work
-test out	uh uh <eos>
+test out	
 =====
 input	tengo diecinueve
 output	i'm 19
-test out	uh <eos>
+test out	
 =====
 input	estoy levantado
 output	i'm up
-test out	levantado levantado <eos>
+test out	
 =====
 input	escucha
 output	listen
-test out	<eos>
+test out	
 =====
 input	escuche
 output	listen
-test out	uh uh <eos>
+test out	
 =====
 input	escuchen
 output	listen
-test out	escuchen escuchen escuchen <eos>
+test out	
 =====
 input	no puede ser
 output	can not be
-test out	no no <eos>
+test out	
 =====
 input	de ninguna manera
 output	no way
 output	no way
-test out	de <eos>
+test out	
 =====
 input	imposible
 output	no way
-test out	imposible <eos>
+test out	
 =====
 input	de ningún modo
 output	no way
-test out	<eos>
+test out	
 =====
 input	de eso nada
 output	nothing about that
-test out	uh <eos>
+test out	
 =====
 input	ni cagando
 output	no way
-test out	<eos>
+test out	
 =====
 input	mangos
 output	no way
-test out	uh uh <eos>
+test out	
 =====
 input	minga
 output	no way
-test out	uh <eos>
+test out	
 =====
 input	ni en pedo
 output	not even fart
-test out	uh uh uh <eos>
+test out	
 =====
 input	en serio
 output	really
-test out	serio serio
+test out	
 =====
 input	la verdad
 output	the truth
-test out	uh uh <eos>
+test out	
 =====
 input	gracias
 output	thanks
 output	thanks
-test out	uh <eos>
+test out	
 =====
 input	pruébalo
 output	try it
-test out	<eos>
+test out	
 =====
 input	lo procuramos
 output	we try
-test out	<eos>
+test out	
 =====
 input	ganamos
 output	we won
-test out	uh <eos>
+test out	
 =====
 input	por qué yo
 output	why me
-test out	por por <eos>
+test out	
 =====
 input	pregúntale a tom
 output	ask tom
-test out	a a a tom tom <eos>
+test out	
 =====
 input	órale
 output	awesome
@@ -297,376 +297,376 @@ output	come on
 output	come on
 output	go away
 output	go away
-test out	<eos>
+test out	
 =====
 input	mantente en calma
 output	be calm
-test out	uh uh <eos>
+test out	
 =====
 input	estate tranquilo
 output	be cool
-test out	tranquilo tranquilo tranquilo
+test out	
 =====
 input	sé justo
 output	be fair
-test out	uh <eos>
+test out	
 =====
 input	sean gentiles
 output	be kind
-test out	uh uh uh <eos>
+test out	
 =====
 input	sé agradable
 output	be nice
-test out	uh uh <eos>
+test out	
 =====
 input	pírate
 output	beat it
-test out	uh <eos>
+test out	
 =====
 input	llamame
 output	call me
-test out	<eos>
+test out	
 =====
 input	llamadme
 output	call me
-test out	uh uh <eos>
+test out	
 =====
 input	llámame
 output	call me
-test out	uh uh uh
+test out	
 =====
 input	llámanos
 output	call us
-test out	uh
+test out	
 =====
 input	entre
 output	come in
 output	go on in
-test out	<eos>
+test out	
 =====
 input	pase
 output	come in
-test out	uh pase <eos>
+test out	
 =====
 input	entren
 output	come in
 output	go on in
-test out	uh <eos>
+test out	
 =====
 input	ándale
 output	come on
-test out	<eos>
+test out	
 =====
 input	suéltalo
 output	drop it
-test out	<eos>
+test out	
 =====
 input	agarra a tom
 output	get tom
-test out	<eos>
+test out	
 =====
 input	bájate
 output	get out
-test out	uh <eos>
+test out	
 =====
 input	sal
 output	get out
-test out	<eos>
+test out	
 =====
 input	salid
 output	get out
-test out	uh <eos>
+test out	
 =====
 input	salgan
 output	get out
-test out	uh <eos>
+test out	
 =====
 input	vete de aquí
 output	go away
 output	get out of here
 output	get out of here
-test out	vete vete vete <eos>
+test out	
 =====
 input	lárgate
 output	go away
 output	get out
 output	get away
 output	get lost
-test out	lárgate lárgate lárgate lárgate <eos>
+test out	
 =====
 input	salga de aquí
 output	get out of here
-test out	uh uh uh <eos>
+test out	
 =====
 input	largo
 output	go away
 output	long
 output	get away
 output	get lost
-test out	uh uh <eos>
+test out	
 =====
 input	vete ya
 output	go away
 output	go away
 output	go away
-test out	uh <eos>
+test out	
 =====
 input	a la calle
 output	on the street
-test out	a <eos>
+test out	
 =====
 input	lárguese
 output	get out
-test out	lárguese lárguese lárguese <eos>
+test out	
 =====
 input	vete a casa
 output	go home
-test out	vete vete vete <eos>
+test out	
 =====
 input	vaya despacio
 output	go slow
-test out	<eos>
+test out	
 =====
 input	hasta luego
 output	goodbye
 output	until then
-test out	uh hasta hasta hasta hasta <eos>
+test out	
 =====
 input	hasta la vista
 output	goodbye
 output	until the view
-test out	<eos>
+test out	
 =====
 input	chau
 output	goodbye
-test out	chau <eos>
+test out	
 =====
 input	espera un momento
 output	hang on
-test out	uh un <eos>
+test out	
 =====
 input	un segundo
 output	one second
-test out	segundo <eos>
+test out	
 =====
 input	agarra fuertemente
 output	hold tight
 output	hold on
-test out	agarra <eos>
+test out	
 =====
 input	él vino
 output	he came
-test out	uh él él él <eos>
+test out	
 =====
 input	él renunció
 output	he quit
-test out	<eos>
+test out	
 =====
 input	ayúdame
 output	help me
 output	help me
-test out	ayúdame <eos>
+test out	
 =====
 input	échame una mano
 output	give me a hand
-test out	uh <eos>
+test out	
 =====
 input	ayudame
 output	help me
-test out	uh <eos>
+test out	
 =====
 input	ayúdanos
 output	help us
-test out	uh
+test out	
 =====
 input	golpea a tom
 output	hit tom
-test out	<eos>
+test out	
 =====
 input	resista
 output	hold on
-test out	resista resista resista resista
+test out	
 =====
 input	resiste
 output	hold on
-test out	<eos>
+test out	
 =====
 input	abraza a tom
 output	hug tom
-test out	uh tom <eos>
+test out	
 =====
 input	estoy de acuerdo
 output	i agree
-test out	estoy estoy estoy estoy estoy <eos>
+test out	
 =====
 input	de acuerdo
 output	agree
-test out	uh <eos>
+test out	
 =====
 input	me incliné
 output	i bowed
-test out	<eos>
+test out	
 =====
 input	me he mudado
 output	i moved
-test out	me he <eos>
+test out	
 =====
 input	me mudé
 output	i moved
-test out	uh mudé mudé <eos>
+test out	
 =====
 input	me trasladé
 output	i moved
-test out	<eos>
+test out	
 =====
 input	me he trasladado
 output	i moved
-test out	uh uh uh <eos>
+test out	
 =====
 input	dormí
 output	i slept
-test out	<eos>
+test out	
 =====
 input	lo intenté
 output	i tried
-test out	uh <eos>
+test out	
 =====
 input	iré
 output	i'll go
-test out	iré <eos>
+test out	
 =====
 input	soy tom
 output	i'm tom
-test out	tom <eos>
+test out	
 =====
 input	estoy gordo
 output	i'm fat
 output	am i fat
-test out	<eos>
+test out	
 =====
 input	soy gorda
 output	i'm fat
 output	i am fat
-test out	<eos>
+test out	
 =====
 input	estoy en forma
 output	i'm fit
-test out	estoy en en en forma <eos>
+test out	
 =====
 input	estoy afectado
 output	i'm affected
-test out	estoy afectado <eos>
+test out	
 =====
 input	soy viejo
 output	i'm old
-test out	uh viejo viejo viejo <eos>
+test out	
 =====
 input	soy tímido
 output	i'm shy
-test out	soy tímido tímido <eos>
+test out	
 =====
 input	estoy mojada
 output	i'm wet
-test out	uh <eos>
+test out	
 =====
 input	está bien
 output	it's ok
-test out	uh <eos>
+test out	
 =====
 input	soy yo
 output	it's me
 output	it's me
-test out	uh uh soy soy soy soy soy <eos>
+test out	
 =====
 input	únete a nosotros
 output	join us
-test out	uh uh únete a a a a <eos>
+test out	
 =====
 input	sé parte nuestra
 output	be part of us
-test out	uh <eos>
+test out	
 =====
 input	guárdalo
 output	keep it
-test out	uh
+test out	
 =====
 input	yo también
 output	me too
-test out	también también <eos>
+test out	
 =====
 input	abre
 output	open up
-test out	<eos>
+test out	
 =====
 input	perfecto
 output	perfect
-test out	<eos>
+test out	
 =====
 input	nos vemos
 output	see you
-test out	<eos>
+test out	
 =====
 input	muéstramelo
 output	show me
-test out	uh uh uh uh uh
+test out	
 =====
 input	enséñamelo
 output	show me
-test out	<eos>
+test out	
 =====
 input	mostrame
 output	show me
-test out	uh
+test out	
 =====
 input	cierra la boca
 output	close your mouth
-test out	cierra la <eos>
+test out	
 =====
 input	sáltatelo
 output	skip it
-test out	uh uh <eos>
+test out	
 =====
 input	páralo
 output	stop it
-test out	páralo <eos>
+test out	
 =====
 input	deténlo
 output	stop it
-test out	uh uh uh
+test out	
 =====
 input	cógelo
 output	take it
-test out	uh uh cógelo cógelo
+test out	
 =====
 input	decime
 output	tell me
-test out	uh <eos>
+test out	
 =====
 input	tom comió
 output	tom ate
-test out	tom tom tom tom <eos>
+test out	
 =====
 input	tom corrió
 output	tom ran
-test out	uh <eos>
+test out	
 =====
 input	tom ganó
 output	tom won
-test out	<eos>
+test out	
 =====
 input	espérame despierto
 output	wait for me awake
-test out	<eos>
+test out	
 =====
 input	despierta
 output	wake up
 output	wake up
 output	get real
-test out	uh <eos>
+test out	
 =====
 input	despiértate
 output	wake up
-test out	<eos>
+test out	
 =====
 input	despertate
 output	wake up
@@ -674,163 +674,163 @@ test out
 =====
 input	lávate las manos
 output	wash your hands
-test out	uh las <eos>
+test out	
 =====
 input	nos preocupamos
 output	we care
-test out	nos nos <eos>
+test out	
 =====
 input	lo sabemos
 output	we know
-test out	uh <eos>
+test out	
 =====
 input	perdimos
 output	we lost
-test out	<eos>
+test out	
 =====
 input	bienvenidos
 output	welcome
-test out	bienvenidos bienvenidos <eos>
+test out	
 =====
 input	bienvenidas
 output	welcome
-test out	<eos>
+test out	
 =====
 input	quién comió
 output	who ate
-test out	<eos>
+test out	
 =====
 input	quién corría
 output	who ran
-test out	<eos>
+test out	
 =====
 input	quién corrió
 output	who ran
-test out	corrió corrió corrió <eos>
+test out	
 =====
 input	quién ganó
 output	who won
-test out	<eos>
+test out	
 =====
 input	quién ha ganado
 output	who won
-test out	quién quién <eos>
+test out	
 =====
 input	por qué no
 output	why not
-test out	uh <eos>
+test out	
 =====
 input	has ganado
 output	you won
-test out	uh uh uh uh uh <eos>
+test out	
 =====
 input	preguntales
 output	ask them
-test out	uh uh preguntales
+test out	
 =====
 input	pregúntales
 output	ask them
-test out	uh uh
+test out	
 =====
 input	aparta
 output	back off
-test out	uh uh aparta aparta aparta
+test out	
 =====
 input	apártate
 output	back off
-test out	uh <eos>
+test out	
 =====
 input	sé un hombre
 output	be a man
-test out	uh hombre <eos>
+test out	
 =====
 input	sé fuerte
 output	be brave
-test out	<eos>
+test out	
 =====
 input	sé breve
 output	be brief
-test out	uh
+test out	
 =====
 input	sea breve
 output	be brief
-test out	uh uh uh uh uh <eos>
+test out	
 =====
 input	sean breves
 output	be brief
-test out	<eos>
+test out	
 =====
 input	estate quieto
 output	be quiet
-test out	estate estate <eos>
+test out	
 =====
 input	no te muevas
 output	do not move
-test out	muevas <eos>
+test out	
 =====
 input	llamalo a tomás
 output	call tom
-test out	uh uh <eos>
+test out	
 =====
 input	llámalo a tomás
 output	call tom
-test out	<eos>
+test out	
 =====
 input	llámenlo a tomás
 output	call tom
-test out	tomás <eos>
+test out	
 =====
 input	anímate
 output	cheer up
-test out	uh uh <eos>
+test out	
 =====
 input	venga
 output	cheer up
-test out	<eos>
+test out	
 =====
 input	cálmate
 output	cool off
-test out	uh uh uh uh <eos>
+test out	
 =====
 input	espósale
 output	cuff him
-test out	espósale <eos>
+test out	
 =====
 input	no te vayas
 output	don't go
-test out	te te te <eos>
+test out	
 =====
 input	encontralo a tomás
 output	find tom
-test out	a a a <eos>
+test out	
 =====
 input	encuéntralo a tomás
 output	find tom
-test out	uh <eos>
+test out	
 =====
 input	encuéntrelo a tomás
 output	find tom
-test out	uh uh uh <eos>
+test out	
 =====
 input	encuéntrenlo a tomás
 output	find tom
-test out	<eos>
+test out	
 =====
 input	encuentre a tom
 output	find tom
-test out	a a tom <eos>
+test out	
 =====
 input	encuentren a tom
 output	find tom
-test out	uh <eos>
+test out	
 =====
 input	arregla esto
 output	fix this
-test out	uh <eos>
+test out	
 =====
 input	ponte a ello
 output	get to it
-test out	<eos>
+test out	
 =====
 input	abajo
 output	get down
@@ -838,249 +838,249 @@ test out
 =====
 input	túmbate
 output	get down
-test out	uh <eos>
+test out	
 =====
 input	piérdete
 output	get lost
-test out	uh <eos>
+test out	
 =====
 input	esfúmate
 output	get lost
-test out	uh uh uh uh uh uh <eos>
+test out	
 =====
 input	piénsalo bien
 output	think wisely
-test out	<eos>
+test out	
 =====
 input	abre los ojos
 output	open your eyes
-test out	ojos ojos ojos ojos <eos>
+test out	
 =====
 input	adelante
 output	go ahead
 output	go ahead
-test out	<eos>
+test out	
 =====
 input	entra
 output	go on in
-test out	<eos>
+test out	
 =====
 input	entrá
 output	go on in
-test out	uh <eos>
+test out	
 =====
 input	entrad
 output	go on in
-test out	uh <eos>
+test out	
 =====
 input	buen trabajo
 output	good job
-test out	<eos>
+test out	
 =====
 input	sujeta a tom
 output	grab tom
-test out	<eos>
+test out	
 =====
 input	agárralo
 output	grab him
-test out	agárralo agárralo <eos>
+test out	
 =====
 input	diviértanse
 output	have fun
-test out	<eos>
+test out	
 =====
 input	pásala bien
 output	have fun
-test out	uh uh <eos>
+test out	
 =====
 input	pásenla bien
 output	have fun
-test out	<eos>
+test out	
 =====
 input	él habló
 output	he spoke
-test out	<eos>
+test out	
 =====
 input	él lo intenta
 output	he tries
-test out	uh él <eos>
+test out	
 =====
 input	él prueba
 output	he tests
-test out	él él él él él <eos>
+test out	
 =====
 input	ayuda a tom
 output	help tom
-test out	ayuda <eos>
+test out	
 =====
 input	ayúdalo
 output	help him
-test out	<eos>
+test out	
 =====
 input	hola qué hay
 output	hi what's up
-test out	uh uh <eos>
+test out	
 =====
 input	ey chavales
 output	hey kids
-test out	ey chavales chavales chavales <eos>
+test out	
 =====
 input	qué pasa troncos
 output	what's up logs
-test out	uh troncos troncos troncos <eos>
+test out	
 =====
 input	buenas
 output	good
-test out	<eos>
+test out	
 =====
 input	qué tal os va
 output	how are you doing
-test out	tal os va va va <eos>
+test out	
 =====
 input	hola por aquí
 output	hello over here
-test out	<eos>
+test out	
 =====
 input	qué encanto
 output	how cute
-test out	<eos>
+test out	
 =====
 input	qué tan profundo
 output	how deep
-test out	qué profundo <eos>
+test out	
 =====
 input	cómo de profundo
 output	how deep
-test out	uh cómo de <eos>
+test out	
 =====
 input	hazme el favor
 output	do me the favor
-test out	hazme hazme hazme hazme <eos>
+test out	
 =====
 input	compláceme
 output	please me
-test out	<eos>
+test out	
 =====
 input	date prisa
 output	hurry up
-test out	uh <eos>
+test out	
 =====
 input	apresúrate
 output	hurry up
-test out	apresúrate <eos>
+test out	
 =====
 input	convine
 output	i agreed
-test out	<eos>
+test out	
 =====
 input	acepté
 output	i agreed
-test out	acepté acepté
+test out	
 =====
 input	accedí
 output	i agreed
-test out	uh accedí accedí accedí <eos>
+test out	
 =====
 input	estoy viejo
 output	i am old
-test out	<eos>
+test out	
 =====
 input	me lo comí
 output	i ate it
-test out	uh comí comí <eos>
+test out	
 =====
 input	me la comí
 output	i ate it
-test out	uh la <eos>
+test out	
 =====
 input	puedo ir
 output	i can go
-test out	ir ir <eos>
+test out	
 =====
 input	lo hice bien
 output	i did ok
-test out	uh uh <eos>
+test out	
 =====
 input	lo hice
 output	i did it
-test out	uh uh uh <eos>
+test out	
 =====
 input	fracasé
 output	i failed
-test out	uh uh <eos>
+test out	
 =====
 input	lo olvidé
 output	i forgot
-test out	<eos>
+test out	
 =====
 input	me las arreglo
 output	i get by
-test out	arreglo arreglo arreglo arreglo <eos>
+test out	
 =====
 input	lo entiendo
 output	i get it
-test out	<eos>
+test out	
 =====
 input	llamé por teléfono
 output	i phoned
-test out	uh uh uh <eos>
+test out	
 =====
 input	me niego
 output	i refuse
-test out	uh <eos>
+test out	
 =====
 input	renuncio
 output	i resign
-test out	uh <eos>
+test out	
 =====
 input	lo vi
 output	i saw it
-test out	lo <eos>
+test out	
 =====
 input	sonreí
 output	i smiled
-test out	uh <eos>
+test out	
 =====
 input	me quedé
 output	i stayed
-test out	me me <eos>
+test out	
 =====
 input	hablé
 output	i talked
-test out	hablé hablé <eos>
+test out	
 =====
 input	hablaba
 output	i talked
-test out	uh uh uh uh
+test out	
 =====
 input	charlé
 output	i talked
-test out	uh uh <eos>
+test out	
 =====
 input	charlaba
 output	i talked
-test out	charlaba charlaba charlaba charlaba charlaba
+test out	
 =====
 input	yo lo uso
 output	i use it
-test out	uh uh uh uh uh <eos>
+test out	
 =====
 input	esperé
 output	i waited
-test out	uh uh
+test out	
 =====
 input	yo pagaré
 output	i'll pay
-test out	<eos>
+test out	
 =====
 input	he vuelto
 output	i'm back
-test out	vuelto vuelto vuelto <eos>
+test out	
 =====
 input	estoy de vuelta
 output	i'm back
-test out	de <eos>
+test out	
 =====
 input	soy calvo
 output	i'm bald
-test out	uh uh uh uh <eos>
+test out	

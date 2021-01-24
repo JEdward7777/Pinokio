@@ -1,0 +1,12 @@
+python3 -m virtualenv venv
+. venv/bin/activate
+#https://pytorch.org/
+pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+#stable baselines 3 
+#https://stable-baselines3.readthedocs.io/en/master/guide/install.html
+pip install stable-baselines3[extra]
+
+#if you want tensorboard
+#https://pytorch.org/tutorials/recipes/recipes/tensorboard_with_pytorch.html
+pip install tensorboard
+tensorboard --logdir `readlink -f ./log/`
