@@ -65,7 +65,7 @@ test out	jump jump <eos>
 input	salte
 output	jump
 output	get out
-test out	out jump <eos>
+test out	get jump <eos>
 =====
 input	parad
 output	stop
@@ -108,19 +108,19 @@ test out	ran i <eos>
 =====
 input	lo intento
 output	i try
-test out	we try <eos>
+test out	i try <eos>
 =====
 input	he ganado
 output	i won
-test out	i won <eos>
+test out	i'm won <eos>
 =====
 input	oh no
 output	oh no
-test out	not don't <eos>
+test out	do don't <eos>
 =====
 input	tomátelo con soda
 output	drink it with soda
-test out	it <eos>
+test out	with <eos>
 =====
 input	sonríe
 output	smile
@@ -136,7 +136,7 @@ test out	attack attack <eos>
 =====
 input	levanta
 output	get up
-test out	up up <eos>
+test out	up get <eos>
 =====
 input	ve ahora mismo
 output	go now
@@ -145,11 +145,11 @@ test out	go <eos>
 input	lo tengo
 output	got it
 output	i got it
-test out	we got <eos>
+test out	i got <eos>
 =====
 input	lo pillas
 output	got it
-test out	we got <eos>
+test out	i got <eos>
 =====
 input	entendiste
 output	got it
@@ -173,7 +173,7 @@ test out	i fell <eos>
 =====
 input	yo lo sé
 output	i know
-test out	me know <eos>
+test out	i know <eos>
 =====
 input	salí
 output	i left
@@ -244,7 +244,7 @@ test out	of nothing <eos>
 =====
 input	ni cagando
 output	no way
-test out	not way <eos>
+test out	no way <eos>
 =====
 input	mangos
 output	no way
@@ -256,7 +256,7 @@ test out	way no <eos>
 =====
 input	ni en pedo
 output	not even fart
-test out	not fart <eos>
+test out	even fart <eos>
 =====
 input	en serio
 output	really
@@ -264,7 +264,7 @@ test out	even really <eos>
 =====
 input	la verdad
 output	the truth
-test out	the truth <eos>
+test out	your truth <eos>
 =====
 input	gracias
 output	thanks
@@ -277,7 +277,7 @@ test out	it try <eos>
 =====
 input	lo procuramos
 output	we try
-test out	we try <eos>
+test out	i try <eos>
 =====
 input	ganamos
 output	we won
@@ -309,7 +309,7 @@ test out	be cool <eos>
 =====
 input	sé justo
 output	be fair
-test out	be fair <eos>
+test out	know fair <eos>
 =====
 input	sean gentiles
 output	be kind
@@ -317,7 +317,7 @@ test out	be kind <eos>
 =====
 input	sé agradable
 output	be nice
-test out	be nice <eos>
+test out	know nice <eos>
 =====
 input	pírate
 output	beat it
@@ -363,7 +363,7 @@ test out	it drop <eos>
 =====
 input	agarra a tom
 output	get tom
-test out	get <eos>
+test out	to <eos>
 =====
 input	bájate
 output	get out
@@ -413,7 +413,7 @@ test out	go <eos>
 =====
 input	a la calle
 output	on the street
-test out	on street <eos>
+test out	your street <eos>
 =====
 input	lárguese
 output	get out
@@ -430,12 +430,12 @@ test out	go slow <eos>
 input	hasta luego
 output	goodbye
 output	until then
-test out	goodbye then <eos>
+test out	until then <eos>
 =====
 input	hasta la vista
 output	goodbye
 output	until the view
-test out	goodbye view <eos>
+test out	until view <eos>
 =====
 input	chau
 output	goodbye
@@ -447,12 +447,12 @@ test out	wait <eos>
 =====
 input	un segundo
 output	one second
-test out	one second <eos>
+test out	a second <eos>
 =====
 input	agarra fuertemente
 output	hold tight
 output	hold on
-test out	get on <eos>
+test out	hold on <eos>
 =====
 input	él vino
 output	he came
@@ -469,7 +469,7 @@ test out	help me <eos>
 =====
 input	échame una mano
 output	give me a hand
-test out	me hand <eos>
+test out	a hand <eos>
 =====
 input	ayudame
 output	help me
@@ -529,7 +529,7 @@ test out	i slept <eos>
 =====
 input	lo intenté
 output	i tried
-test out	we tried <eos>
+test out	i tried <eos>
 =====
 input	iré
 output	i'll go
@@ -584,7 +584,7 @@ test out	join us <eos>
 =====
 input	sé parte nuestra
 output	be part of us
-test out	be us <eos>
+test out	of us <eos>
 =====
 input	guárdalo
 output	keep it
@@ -592,7 +592,7 @@ test out	keep it <eos>
 =====
 input	yo también
 output	me too
-test out	me too <eos>
+test out	i'll too <eos>
 =====
 input	abre
 output	open up
@@ -612,7 +612,7 @@ test out	show me <eos>
 =====
 input	enséñamelo
 output	show me
-test out	show i <eos>
+test out	show me <eos>
 =====
 input	mostrame
 output	show me
@@ -682,7 +682,7 @@ test out	we care <eos>
 =====
 input	lo sabemos
 output	we know
-test out	we know <eos>
+test out	i know <eos>
 =====
 input	perdimos
 output	we lost
@@ -742,15 +742,15 @@ test out	back off <eos>
 =====
 input	sé un hombre
 output	be a man
-test out	be man <eos>
+test out	a man <eos>
 =====
 input	sé fuerte
 output	be brave
-test out	uh brave brave <eos>
+test out	know brave <eos>
 =====
 input	sé breve
 output	be brief
-test out	be brief <eos>
+test out	know brief <eos>
 =====
 input	sea breve
 output	be brief
@@ -842,7 +842,7 @@ test out	get down <eos>
 =====
 input	piérdete
 output	get lost
-test out	get get <eos>
+test out	get lost <eos>
 =====
 input	esfúmate
 output	get lost
@@ -854,7 +854,7 @@ test out	think fun <eos>
 =====
 input	abre los ojos
 output	open your eyes
-test out	open eyes <eos>
+test out	your eyes <eos>
 =====
 input	adelante
 output	go ahead
@@ -919,7 +919,7 @@ test out	help him <eos>
 =====
 input	hola qué hay
 output	hi what's up
-test out	hello up <eos>
+test out	why up <eos>
 =====
 input	ey chavales
 output	hey kids
@@ -935,11 +935,11 @@ test out	good good <eos>
 =====
 input	qué tal os va
 output	how are you doing
-test out	are doing <eos>
+test out	you doing <eos>
 =====
 input	hola por aquí
 output	hello over here
-test out	hello here <eos>
+test out	over here <eos>
 =====
 input	qué encanto
 output	how cute
@@ -955,7 +955,7 @@ test out	how deep <eos>
 =====
 input	hazme el favor
 output	do me the favor
-test out	do <eos>
+test out	the <eos>
 =====
 input	compláceme
 output	please me
@@ -995,15 +995,15 @@ test out	i it <eos>
 =====
 input	puedo ir
 output	i can go
-test out	i go <eos>
+test out	can go <eos>
 =====
 input	lo hice bien
 output	i did ok
-test out	we fun <eos>
+test out	it fun <eos>
 =====
 input	lo hice
 output	i did it
-test out	we it <eos>
+test out	i it <eos>
 =====
 input	fracasé
 output	i failed
@@ -1011,7 +1011,7 @@ test out	i failed <eos>
 =====
 input	lo olvidé
 output	i forgot
-test out	we forgot <eos>
+test out	i forgot <eos>
 =====
 input	me las arreglo
 output	i get by
@@ -1019,11 +1019,11 @@ test out	i by <eos>
 =====
 input	lo entiendo
 output	i get it
-test out	we it <eos>
+test out	i it <eos>
 =====
 input	llamé por teléfono
 output	i phoned
-test out	i <eos>
+test out	over <eos>
 =====
 input	me niego
 output	i refuse
@@ -1035,7 +1035,7 @@ test out	i resign <eos>
 =====
 input	lo vi
 output	i saw it
-test out	we it <eos>
+test out	i it <eos>
 =====
 input	sonreí
 output	i smiled
@@ -1063,7 +1063,7 @@ test out	i talked <eos>
 =====
 input	yo lo uso
 output	i use it
-test out	me it <eos>
+test out	i it <eos>
 =====
 input	esperé
 output	i waited
@@ -1071,11 +1071,11 @@ test out	i waited <eos>
 =====
 input	yo pagaré
 output	i'll pay
-test out	me pay <eos>
+test out	i'll pay <eos>
 =====
 input	he vuelto
 output	i'm back
-test out	i back <eos>
+test out	i'm back <eos>
 =====
 input	estoy de vuelta
 output	i'm back
