@@ -65,7 +65,7 @@ test out	jump jump <eos>
 input	salte
 output	jump
 output	get out
-test out	get jump <eos>
+test out	out jump <eos>
 =====
 input	parad
 output	stop
@@ -92,7 +92,7 @@ test out	wait wait <eos>
 input	continúa
 output	go on
 output	drive on
-test out	go drive <eos>
+test out	on drive <eos>
 =====
 input	continúe
 output	go on
@@ -116,7 +116,7 @@ test out	i'm won <eos>
 =====
 input	oh no
 output	oh no
-test out	do don't <eos>
+test out	not don't <eos>
 =====
 input	tomátelo con soda
 output	drink it with soda
@@ -191,7 +191,7 @@ test out	lost i <eos>
 input	dimito
 output	i quit
 output	i resign
-test out	i resign <eos>
+test out	quit resign <eos>
 =====
 input	renuncié
 output	i quit
@@ -223,7 +223,7 @@ test out	listen listen <eos>
 =====
 input	no puede ser
 output	can not be
-test out	not be <eos>
+test out	do be <eos>
 =====
 input	de ninguna manera
 output	no way
@@ -256,7 +256,7 @@ test out	way no <eos>
 =====
 input	ni en pedo
 output	not even fart
-test out	even fart <eos>
+test out	not fart fart fart fart fart fart fart <eos>
 =====
 input	en serio
 output	really
@@ -363,7 +363,7 @@ test out	it drop <eos>
 =====
 input	agarra a tom
 output	get tom
-test out	to <eos>
+test out	get <eos>
 =====
 input	bájate
 output	get out
@@ -413,7 +413,7 @@ test out	go <eos>
 =====
 input	a la calle
 output	on the street
-test out	your street <eos>
+test out	on street <eos>
 =====
 input	lárguese
 output	get out
@@ -421,7 +421,7 @@ test out	get out <eos>
 =====
 input	vete a casa
 output	go home
-test out	go home <eos>
+test out	get home <eos>
 =====
 input	vaya despacio
 output	go slow
@@ -435,7 +435,7 @@ test out	until then <eos>
 input	hasta la vista
 output	goodbye
 output	until the view
-test out	until view <eos>
+test out	your view <eos>
 =====
 input	chau
 output	goodbye
@@ -497,7 +497,7 @@ test out	hug <eos>
 =====
 input	estoy de acuerdo
 output	i agree
-test out	i'm agree <eos>
+test out	i agree <eos>
 =====
 input	de acuerdo
 output	agree
@@ -584,7 +584,7 @@ test out	join us <eos>
 =====
 input	sé parte nuestra
 output	be part of us
-test out	of us <eos>
+test out	be us <eos>
 =====
 input	guárdalo
 output	keep it
@@ -616,7 +616,7 @@ test out	show me <eos>
 =====
 input	mostrame
 output	show me
-test out	show me <eos>
+test out	show i <eos>
 =====
 input	cierra la boca
 output	close your mouth
@@ -674,7 +674,7 @@ test out	wake up <eos>
 =====
 input	lávate las manos
 output	wash your hands
-test out	wash hands <eos>
+test out	wash hands hands <eos>
 =====
 input	nos preocupamos
 output	we care
@@ -766,7 +766,7 @@ test out	be quiet <eos>
 =====
 input	no te muevas
 output	do not move
-test out	not move <eos>
+test out	do move <eos>
 =====
 input	llamalo a tomás
 output	call tom
@@ -814,7 +814,7 @@ test out	find tom <eos>
 =====
 input	encuéntrenlo a tomás
 output	find tom
-test out	find tom <eos>
+test out	to tom <eos>
 =====
 input	encuentre a tom
 output	find tom
@@ -854,7 +854,7 @@ test out	think fun <eos>
 =====
 input	abre los ojos
 output	open your eyes
-test out	your eyes <eos>
+test out	open eyes <eos>
 =====
 input	adelante
 output	go ahead
@@ -863,15 +863,15 @@ test out	go ahead <eos>
 =====
 input	entra
 output	go on in
-test out	on in <eos>
+test out	go in <eos>
 =====
 input	entrá
 output	go on in
-test out	on in <eos>
+test out	go in <eos>
 =====
 input	entrad
 output	go on in
-test out	on in <eos>
+test out	go in <eos>
 =====
 input	buen trabajo
 output	good job
@@ -919,7 +919,7 @@ test out	help him <eos>
 =====
 input	hola qué hay
 output	hi what's up
-test out	why up <eos>
+test out	hello up <eos>
 =====
 input	ey chavales
 output	hey kids
@@ -927,7 +927,7 @@ test out	hey kids <eos>
 =====
 input	qué pasa troncos
 output	what's up logs
-test out	why logs <eos>
+test out	why logs logs <eos>
 =====
 input	buenas
 output	good
@@ -939,7 +939,7 @@ test out	you doing <eos>
 =====
 input	hola por aquí
 output	hello over here
-test out	over here <eos>
+test out	hi here <eos>
 =====
 input	qué encanto
 output	how cute
@@ -947,7 +947,7 @@ test out	why cute <eos>
 =====
 input	qué tan profundo
 output	how deep
-test out	why deep <eos>
+test out	what's deep <eos>
 =====
 input	cómo de profundo
 output	how deep
@@ -955,7 +955,7 @@ test out	how deep <eos>
 =====
 input	hazme el favor
 output	do me the favor
-test out	the <eos>
+test out	do <eos>
 =====
 input	compláceme
 output	please me
@@ -999,7 +999,7 @@ test out	can go <eos>
 =====
 input	lo hice bien
 output	i did ok
-test out	it fun <eos>
+test out	we ok <eos>
 =====
 input	lo hice
 output	i did it
@@ -1023,7 +1023,7 @@ test out	i it <eos>
 =====
 input	llamé por teléfono
 output	i phoned
-test out	over <eos>
+test out	i <eos>
 =====
 input	me niego
 output	i refuse
@@ -1079,7 +1079,7 @@ test out	i'm back <eos>
 =====
 input	estoy de vuelta
 output	i'm back
-test out	i'm back <eos>
+test out	i back <eos>
 =====
 input	soy calvo
 output	i'm bald
